@@ -13,6 +13,12 @@
 
 <h1>Airfryers</h1>
 
+<div class="where-hashtag">
+  <% if params[:name].present? %>
+    <p>#<%= params[:name] %></p>
+  <% end %>
+</div>      
+
 <div id="airfryers">
   <% @airfryers.each do |airfryer| %>
     <%= render airfryer %>

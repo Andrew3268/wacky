@@ -10,7 +10,12 @@ class AirfryersController < ApplicationController
   def show
   end
 
-  # GET /airfryers/new
+  def hashtags
+    tag = Tag.find_by(name: params[:name])
+    @airfryers = tag.airfryers
+  end
+
+  
   def new
     @airfryer = Airfryer.new
   end
@@ -65,6 +70,6 @@ class AirfryersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def airfryer_params
-      params.require(:airfryer).permit(:af_title, :af_image)
+      params.require(:airfryer).permit(:af_title, :af_image, :af_hashtag)
     end
 end

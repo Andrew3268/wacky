@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_095030) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_054931) do
   create_table "airfryers", force: :cascade do |t|
     t.integer "user_id"
     t.string "af_title"
     t.string "af_image"
+    t.string "af_hashtag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "airfryers_tags", id: false, force: :cascade do |t|
+    t.integer "airfryer_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["airfryer_id"], name: "index_airfryers_tags_on_airfryer_id"
+    t.index ["tag_id"], name: "index_airfryers_tags_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,4 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_095030) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "airfryers_tags", "airfryers"
+  add_foreign_key "airfryers_tags", "tags"
 end

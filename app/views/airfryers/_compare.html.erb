@@ -54,7 +54,10 @@
             <!-- <div class="compare_pct">
               
             </div> -->
+            <%= link_to "Edit this airfryer", edit_airfryer_path(air) %> |
+            <%= button_to "Destroy this airfryer", air, method: :delete %>
           </div><!-- product -->
+
         <% end %>
 
           <div class="product">

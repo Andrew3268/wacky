@@ -4,6 +4,7 @@ class CreateAirfryers < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.string :af_title
       t.string :af_image
+      t.string :af_hashtag
 
       t.timestamps
     end
