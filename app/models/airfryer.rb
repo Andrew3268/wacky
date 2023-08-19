@@ -1,0 +1,2 @@
+class Airfryer < ApplicationRecord
+end

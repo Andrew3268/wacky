@@ -1,0 +1,210 @@
+
+<!-- Compare basket -->
+    <div class="compare-basket">
+      <button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare(Max 3EA)</span></button>
+    </div>
+    <!-- Main view -->
+    <div class="view">
+      <!-- Product grid -->
+      <section class="grid">
+        <!-- Products -->
+        <% @airfryers.each do |air| %>
+          <div class="product">
+            <div class="product__info">
+              
+              <div class="img_box">
+                <img class="product__image" src="<%= air.af_image %>" alt="<%= air.af_title %>" />
+              </div>
+            
+              <h3 class="product__title"><%= air.af_title %></h3>
+              
+                
+
+              <div class="detail extra highlight">
+                <p class="was_price">30,000원</p>
+              </div>
+
+              <div class="detail extra highlight">
+                <p class="pct">50% off</p>
+              </div>
+
+              <div class="detail extra highlight">            
+              </div>
+                
+              
+
+              <div class="detail extra highlight">
+              </div>
+
+
+              <div class="detail extra highlight">
+                <p class="review">1,000개</p>
+              </div>
+
+              
+              <div class="extra detail_btn">
+                <a class="btn" href="#n">View Detail</a>
+              </div>
+              <br><br><br>
+              <!-- <span class="product__is_price bottom_span"></span> -->
+              
+            </div><!-- product__info -->
+            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
+
+            <!-- <div class="compare_pct">
+              
+            </div> -->
+          </div><!-- product -->
+        <% end %>
+
+          <div class="product">
+            <div class="product__info">
+              
+              <div class="img_box">
+                <img class="product__image" src="" alt="" />
+              </div>
+            
+              <h3 class="product__title">상품명</h3>
+              
+                
+
+              <div class="detail extra highlight">
+                <p class="was_price">30,000원</p>
+              </div>
+
+              <div class="detail extra highlight">
+                <p class="pct">50% off</p>
+              </div>
+
+              <div class="detail extra highlight">            
+              </div>
+                
+              
+
+              <div class="detail extra highlight">
+              </div>
+
+
+              <div class="detail extra highlight">
+                <p class="review">1,000개</p>
+              </div>
+
+              
+              <div class="extra detail_btn">
+                <a class="btn" href="#n">View Detail</a>
+              </div>
+              <br><br><br>
+              <!-- <span class="product__is_price bottom_span"></span> -->
+              
+            </div><!-- product__info -->
+            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
+
+            <!-- <div class="compare_pct">
+              
+            </div> -->
+          </div><!-- product -->
+
+          <div class="product">
+            <div class="product__info">
+              
+              <div class="img_box">
+                <img class="product__image" src="" alt="" />
+              </div>
+            
+              <h3 class="product__title">상품명</h3>
+              
+                
+
+              <div class="detail extra highlight">
+                <p class="was_price">30,000원</p>
+              </div>
+
+              <div class="detail extra highlight">
+                <p class="pct">50% off</p>
+              </div>
+
+              <div class="detail extra highlight">            
+              </div>
+                
+              
+
+              <div class="detail extra highlight">
+              </div>
+
+
+              <div class="detail extra highlight">
+                <p class="review">1,000개</p>
+              </div>
+
+              
+              <div class="extra detail_btn">
+                <a class="btn" href="#n">View Detail</a>
+              </div>
+              <br><br><br>
+              <!-- <span class="product__is_price bottom_span"></span> -->
+              
+            </div><!-- product__info -->
+            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
+
+            <!-- <div class="compare_pct">
+              
+            </div> -->
+          </div><!-- product -->
+
+          <div class="product">
+            <div class="product__info">
+              
+              <div class="img_box">
+                <img class="product__image" src="" alt="" />
+              </div>
+            
+              <h3 class="product__title">상품명</h3>
+              
+                
+
+              <div class="detail extra highlight">
+                <p class="was_price">30,000원</p>
+              </div>
+
+              <div class="detail extra highlight">
+                <p class="pct">50% off</p>
+              </div>
+
+              <div class="detail extra highlight">            
+              </div>
+                
+              
+
+              <div class="detail extra highlight">
+              </div>
+
+
+              <div class="detail extra highlight">
+                <p class="review">1,000개</p>
+              </div>
+
+              
+              <div class="extra detail_btn">
+                <a class="btn" href="#n">View Detail</a>
+              </div>
+              <br><br><br>
+              <!-- <span class="product__is_price bottom_span"></span> -->
+              
+            </div><!-- product__info -->
+            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
+
+            <!-- <div class="compare_pct">
+              
+            </div> -->
+          </div><!-- product -->
+
+      </section>
+    </div><!-- /view -->
+    <!-- product compare wrapper -->
+    <section class="compare">
+      <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
+    </section>
+
+
+<%= render 'airfryers/compare_js' %>
+

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @airfryer %>
+
+<div>
+  <%= link_to "Edit this airfryer", edit_airfryer_path(@airfryer) %> |
+  <%= link_to "Back to airfryers", airfryers_path %>
+
+  <%= button_to "Destroy this airfryer", @airfryer, method: :delete %>
+</div>
