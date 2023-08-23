@@ -1,3 +1,5 @@
+<!--  -->
+
 
 <!-- Compare basket -->
     <div class="compare-basket">
@@ -14,33 +16,127 @@
               
               <div class="img_box">
                 <img class="product__image" src="<%= air.af_image %>" alt="<%= air.af_title %>" />
+                <!-- < link_to image_tag(air.af_image, alt: air.af_title, title: air.af_title, :class => 'main_img'), air > -->
               </div>
             
               <h3 class="product__title"><%= air.af_title %></h3>
               
-                
-
               <div class="detail extra highlight">
-                <p class="was_price">30,000원</p>
-              </div>
-
-              <div class="detail extra highlight">
-                <p class="pct">50% off</p>
+                <label>가격대</label>
+                <p class="pct"><%= air.af_price %></p>
               </div>
 
               <div class="detail extra highlight">            
+                <label>형태</label>
+                <p class="pct"><%= air.af_type %></p>
               </div>
+
+              <div class="detail extra highlight">            
+                <label>소재</label>
+                <p class="pct"><%= air.af_material %></p>
+              </div>
+
+              <div class="detail extra highlight">
+                <label>용량</label>
+                <p class="pct"><%= air.af_volume %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>소비전력</label>
+                <p class="pct"><%= number_with_precision(air.af_power, precision: 0) %></p>
+              </div>
+
+              <div class="detail extra highlight">    
+                <% kwh = 0 %>
+                <% kwh = air.af_power / 1000 %>
+                <% totla_kwh = (1 * 30 * kwh) * 97 %>        
+                <label>예상 전기세</label>
+                <p class="pct">약 <%= number_to_currency(totla_kwh, locale: :kr) %>원</p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>조작부</label>
+                <p class="pct"><%= air.af_control %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>온도 조절</label>
+                <p class="pct"><%= air.af_temp %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>타이머</label>
+                <p class="pct"><%= air.af_timer %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>자동 요리메뉴</label>
+                <p class="pct"><%= air.af_automenu %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>로티세리</label>
+                <% if air.af_rotisserie.present? %>
+                  <p class="pct">O</p>
+                <% else %>
+                  <p class="pct">X</p>
+                <% end %>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>스팀</label>
+                <% if air.af_steam.present? %>
+                  <p class="pct">O</p>
+                <% else %>
+                  <p class="pct">X</p>
+                <% end %>
                 
-              
-
-              <div class="detail extra highlight">
               </div>
 
-
-              <div class="detail extra highlight">
-                <p class="review">1,000개</p>
+              <div class="detail extra highlight">            
+                <label>더블히팅</label>
+                <% if air.af_doubleheating.present? %>
+                  <p class="pct">O</p>
+                <% else %>
+                  <p class="pct">X</p>
+                <% end %>
               </div>
 
+              <div class="detail extra highlight">            
+                <label>식품건조</label>
+                <% if air.af_dry.present? %>
+                  <p class="pct">O</p>
+                <% else %>
+                  <p class="pct">X</p>
+                <% end %>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>자동열차단</label>
+                <p class="pct">O</p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>무게</label>
+                <p class="pct"><%= air.af_weight %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>사이즈</label>
+                <p class="pct"><%= air.af_size %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>구성품</label>
+                <p class="pct"><%= air.af_components %></p>
+              </div>
+
+              <div class="detail extra highlight">            
+                <label>부가 기능</label>
+                <p class="pct"><%= air.af_function %></p>
+              </div>
+
+                
               
               <div class="extra detail_btn">
                 <a class="btn" href="#n">View Detail</a>
@@ -54,13 +150,17 @@
             <!-- <div class="compare_pct">
               
             </div> -->
-            <%= link_to "Edit this airfryer", edit_airfryer_path(air) %> |
-            <%= button_to "Destroy this airfryer", air, method: :delete %>
+            <div class="admin_pannel">
+              <% if current_user && current_user.admin? %>
+                <%= link_to "Edit", edit_airfryer_path(air) %> |
+                <%= button_to "Destroy", air, method: :delete %>
+              <% end %>
+            </div>
           </div><!-- product -->
 
         <% end %>
 
-          <div class="product">
+<!--           <div class="product">
             <div class="product__info">
               
               <div class="img_box">
@@ -97,109 +197,13 @@
                 <a class="btn" href="#n">View Detail</a>
               </div>
               <br><br><br>
-              <!-- <span class="product__is_price bottom_span"></span> -->
               
-            </div><!-- product__info -->
-            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
-
-            <!-- <div class="compare_pct">
               
-            </div> -->
-          </div><!-- product -->
-
-          <div class="product">
-            <div class="product__info">
-              
-              <div class="img_box">
-                <img class="product__image" src="" alt="" />
-              </div>
-            
-              <h3 class="product__title">상품명</h3>
-              
-                
-
-              <div class="detail extra highlight">
-                <p class="was_price">30,000원</p>
-              </div>
-
-              <div class="detail extra highlight">
-                <p class="pct">50% off</p>
-              </div>
-
-              <div class="detail extra highlight">            
-              </div>
-                
-              
-
-              <div class="detail extra highlight">
-              </div>
+            </div>
+            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i></label>
+          </div> -->
 
 
-              <div class="detail extra highlight">
-                <p class="review">1,000개</p>
-              </div>
-
-              
-              <div class="extra detail_btn">
-                <a class="btn" href="#n">View Detail</a>
-              </div>
-              <br><br><br>
-              <!-- <span class="product__is_price bottom_span"></span> -->
-              
-            </div><!-- product__info -->
-            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
-
-            <!-- <div class="compare_pct">
-              
-            </div> -->
-          </div><!-- product -->
-
-          <div class="product">
-            <div class="product__info">
-              
-              <div class="img_box">
-                <img class="product__image" src="" alt="" />
-              </div>
-            
-              <h3 class="product__title">상품명</h3>
-              
-                
-
-              <div class="detail extra highlight">
-                <p class="was_price">30,000원</p>
-              </div>
-
-              <div class="detail extra highlight">
-                <p class="pct">50% off</p>
-              </div>
-
-              <div class="detail extra highlight">            
-              </div>
-                
-              
-
-              <div class="detail extra highlight">
-              </div>
-
-
-              <div class="detail extra highlight">
-                <p class="review">1,000개</p>
-              </div>
-
-              
-              <div class="extra detail_btn">
-                <a class="btn" href="#n">View Detail</a>
-              </div>
-              <br><br><br>
-              <!-- <span class="product__is_price bottom_span"></span> -->
-              
-            </div><!-- product__info -->
-            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
-
-            <!-- <div class="compare_pct">
-              
-            </div> -->
-          </div><!-- product -->
 
       </section>
     </div><!-- /view -->

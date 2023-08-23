@@ -13,15 +13,32 @@
 
   <div>
     <%= form.label :af_title, style: "display: block" %>
-    <%= form.text_field :af_title %>
-    <%= form.text_field :af_image %>
-    <%= form.text_field :af_hashtag %>
-    
+    <%= form.text_field :af_title, placeholder: "상품명" %>
+    <%= form.text_field :af_image, placeholder: "이미지" %>
+    <%= form.text_field :af_hashtag, placeholder: "해시태그" %>
+    <%= form.text_field :af_price, placeholder: "가격" %>
+    <%= form.text_field :af_type, placeholder: "형태" %>
+    <%= form.text_field :af_volume, placeholder: "용량" %>
+    <%= form.text_field :af_material, placeholder: "소재" %>
+    <%= form.text_field :af_power, placeholder: "소비전력" %>
+    <%= form.text_field :af_control, placeholder: "조작방식" %>
+    <%= form.text_field :af_temp, placeholder: "온도조절"  %>
+    <%= form.text_field :af_timer, placeholder: "시간조절"  %>
+    <%= form.text_field :af_automenu, placeholder: "자동매뉴갯수"  %>
+    <%= form.text_field :af_rotisserie, placeholder: "로티세리"  %>
+    <%= form.text_field :af_steam, placeholder: "스팀"  %>
+    <%= form.text_field :af_doubleheating, placeholder: "더블히팅"  %>
+    <%= form.text_field :af_dry, placeholder: "식품건조"  %>
+    <%= form.text_field :af_weight, placeholder: "무게"  %>
+    <%= form.text_field :af_size, placeholder: "사이즈"  %>
+    <br/>
+    <%= form.text_area :af_components, placeholder: "구성품"  %>
+    <%= form.text_area :af_function, placeholder: "부가기능"  %>
+
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
-
 

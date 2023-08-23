@@ -16,6 +16,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054931) do
     t.string "af_title"
     t.string "af_image"
     t.string "af_hashtag"
+    t.string "af_price"
+    t.string "af_type"
+    t.string "af_volume"
+    t.string "af_material"
+    t.decimal "af_power"
+    t.string "af_control"
+    t.string "af_temp"
+    t.string "af_timer"
+    t.string "af_automenu"
+    t.string "af_rotisserie"
+    t.string "af_steam"
+    t.string "af_doubleheating"
+    t.string "af_dry"
+    t.string "af_weight"
+    t.string "af_size"
+    t.text "af_components"
+    t.text "af_function"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -100,6 +100,58 @@ if ( typeof define === 'function' && define.amd ) {
       // animate..
       classie.remove(viewEl, 'view--compare');
     });
+
+    
+
+    CompareBasket.prototype._compareItems = function() {
+      var self = this;
+
+      // remove all previous items inside the compareWrapper element
+      [].slice.call(this.compareWrapper.querySelectorAll('div.compare__item')).forEach(function(item) {
+        self.compareWrapper.removeChild(item);
+      });
+
+      // Find the lowest priced item
+      var lowestPrice = Infinity;
+      var lowestPriceIndex = -1;
+
+      for (var i = 0; i < this.totalItems; ++i) {
+        var price = parseFloat(this.items[i].getAttribute('data-price')); // 가격 정보를 가져와서 파싱
+
+        if (!isNaN(price) && price < lowestPrice) {
+          lowestPrice = price;
+          lowestPriceIndex = i;
+        }
+      }
+
+      for (var i = 0; i < this.totalItems; ++i) {
+        var compareItemWrapper = document.createElement('div');
+        compareItemWrapper.className = 'compare__item';
+
+        var compareItemEffectEl = document.createElement('div');
+        compareItemEffectEl.className = 'compare__effect';
+
+        compareItemEffectEl.innerHTML = this.items[i].getAttribute('data-info');
+        
+        // Add a class to the item with the lowest price
+        if (i === lowestPriceIndex) {
+          compareItemEffectEl.classList.add('lowest-price');
+        }
+
+        compareItemWrapper.appendChild(compareItemEffectEl);
+
+        this.compareWrapper.insertBefore(compareItemWrapper, this.compareWrapper.childNodes[0]);
+      }
+
+      setTimeout(function() {
+        // toggle compare basket
+        classie.remove(self.el, 'compare-basket--active');
+        // animate..
+        classie.add(viewEl, 'view--compare');
+      }, 25);
+    };
+
+
   }
 
   CompareBasket.prototype.add = function(item) {
