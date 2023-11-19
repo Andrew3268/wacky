@@ -8,6 +8,7 @@ legend{display:none;}
 button{border:0;background:none;cursor:pointer;}
 table caption{display:none;}
 input, textarea, select{border:1px solid #ccc;-moz-appearance:none;appearance:none;-webkit-appearance:none;outline:none;}
+figure{margin:0;}
 *{box-sizing:border-box;}
 
 .clearfix:after{display:block;clear:both;content:".";visibility:hidden;height:0;}
@@ -32,5 +33,41 @@ body{margin:0;padding:0;font-size:15px;color:#000;line-height:1.5;font-weight:30
   .wrap{width:auto;margin:0 3%;}
 }
 
+/* title line numbers */
+.text_line_two{word-break:break-word;line-height:1.4;height:2.8em;overflow:hidden;display:-webkit-box;display:-ms-flexbox;vertical-align:top;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
+.text_line_three{word-break:break-word;line-height:1.4;height:2.8em;overflow:hidden;display:-webkit-box;display:-ms-flexbox;vertical-align:top;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:3;}
+
 .admin_pannel{display:inline-flex;}
 .admin_pannel a{display:inline-block;}
+
+
+/* Hashtage Location */
+.where-hashtag{margin-bottom:10px;}
+.where-hashtag h2{font-size:1.75rem;font-weight:700;color:#000;text-align:center;position:relative;}
+
+
+/*Fom Style*/
+.input_box{float:left;width:15%;margin:1% 0.5%;}
+.input_box label{display:block;font-size:10px;}
+.input_box input{padding:5px;width:100%;}
+
+/* admin section */
+.admin_section{}
+.admin_section a{}
+.admin_section form{display:inline-block;}
+
+/* Features ul li style custom */
+.features_section ul{margin:0;padding:5px;list-style:none;display:grid;gap:1rem;}
+.features_section ul li{display:grid;grid-template-columns:0 1fr;gap:1.75em;align-items:start;font-size:1rem;line-height:1.4;}
+.features_section ul li::before{content:attr(data-icon);font-size:1rem}
+
+
+
+
+
+
+
+
+
+
+

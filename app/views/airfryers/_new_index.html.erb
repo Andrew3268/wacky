@@ -1,0 +1,173 @@
+<main class="wacky-wrapper">
+  <div class="page-title">
+    <h2>The Air Fryers</h2>
+  </div>
+
+  <div class="magazine-layout">
+
+    <!-- left left left left left left left left left -->
+    <div class="magazine-column">
+      <article class="article">
+        <h3 class="article-title article-title--large">
+          <a href="/hub/airfryers_recommend" class="article-link">나에게 <mark class="mark mark--primary">딱 맞는 에어프라이어</mark> 찾기</a>
+        </h3>
+        <div class="article-excerpt">
+          <p>나에게 딱 필요한 에어프라이어를 찾아보세요.</p>
+        </div> 
+      </article>
+
+      <article class="article">
+        <figure class="article-img">
+          <img src="https://images.unsplash.com/photo-1512521743077-a42eeaaa963c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" />
+        </figure>
+        <h3 class="article-title article-title--small">
+          <a href="/airfryers/af_hashtags/바스켓형" class="article-link"><mark class="mark mark--secondary">바스켓형</mark>에어프라이어 비교하기</a>
+        </h3>
+        
+      </article>
+
+
+      <article class="article">
+        <figure class="article-img">
+          <img src="https://images.unsplash.com/photo-1569234817121-a2552baf4fd4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+        </figure>
+        <h3 class="article-title article-title--small">
+          <a href="/airfryers/af_hashtags/오븐형" class="article-link"><mark class="mark mark--secondary">오븐형</mark>에어프라이어 비교하기</a>
+        </h3>
+        
+      </article>
+
+      <article class="article">
+        <h3 class="article-title article-title--medium">
+          <a href="#" class="article-link">The Founder's Guide to Actually Understanding Users Nowadays</a>
+        </h3>
+        <div class="article-creditation">
+          <p>By Johnathan O'Connell, Andrew Van Dam, Aaron Gregg and Alyssa Fowers</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- middle  middle middle middle middle middle middle middle middle-->
+    <div class="magazine-column">
+
+      <article class="clearfix middle_column">
+        <h3>에디터 추천 에어프라이어</h3>
+        <% @airfryers.each do |airfryer| %>  
+          <% if airfryer.af_recommend.present? %>
+            <section class="editor_recommend">
+              <figure class="article-img img_card clearfix">
+                <%= link_to image_tag(airfryer.af_image, alt: airfryer.af_title, title: airfryer.af_title, :class => 'af_img'), airfryer %>
+              </figure>
+
+              <div class="inner">
+
+                <p class="index_title text_line_two"><%= airfryer.af_title %></p>
+
+                <!-- <div class="ratings">
+                  <% if airfryer.af_rating_code == 50 %>
+                    <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><em><%= airfryer.af_reviews %>개의 리뷰</em></span>
+                  <% elsif airfryer.af_rating_code == 45 %>
+                    <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><em><%= airfryer.af_reviews %>개의 리뷰</em></span>
+                  <% elsif airfryer.af_rating_code == 40 %>
+                    <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %>개의 리뷰</em></span>
+                  <% elsif airfryer.af_rating_code == 35 %>
+                    <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %>개의 리뷰</em></span>
+                  <% elsif airfryer.af_rating_code == 30 %>
+                    <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %>개의 리뷰</em></span>
+                  <% end %>
+                </div> -->
+
+                <div class="pricing index_pricing">
+                  <%= render 'airfryers/pricing_details', airfryer: airfryer %>
+                </div>
+
+                <div class="admin_section">
+                  <% if current_user && current_user.admin? %>  
+                    <%= link_to "Edit", edit_airfryer_path(airfryer) %>
+                  <% end %>
+                </div>
+                
+                
+              </div>
+              
+            </section>
+          <% end %>
+        <% end %>
+
+        <section class="editor_recommend">
+          <figure class="article-img img_card clearfix">
+            <img src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+          </figure>
+          <div class="inner">
+            <p>상품명</p>
+            <p>가격</p>
+          </div>
+        </section>
+
+    </article>
+    
+  </div>
+
+
+
+    <!-- right right right right right right right right right right -->
+    <div class="magazine-column right_blog_section">
+
+      <h3 class="blog_title">Blog</h3>
+
+      <article class="article blog_card clearfix">
+        <figure class="article-img img_card clearfix">
+          <img src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+        </figure>
+        <div class="inner">
+          <p class="index_pricearticle-title article-title--medium">
+            <a href="#" class="article-link">에디터 추천 BEST 5 바스켓형 에어프라이어</a>
+          </p>
+          
+        </div>
+      </article>
+
+      <article class="article blog_card clearfix">
+        <figure class="article-img img_card clearfix">
+          <img src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+        </figure>
+        <div class="inner">
+          <p class="index_pricearticle-title article-title--medium">
+            <a target="_blank" href="https://wackythink.com/%ec%97%90%ec%96%b4%ed%94%84%eb%9d%bc%ec%9d%b4%ec%96%b4-%ea%b5%ac%eb%a7%a4%ea%b0%80%ec%9d%b4%eb%93%9c-2023-%ea%b3%a0%eb%a0%a4%ed%95%b4%ec%95%bc%ed%95%a0-%ec%a0%90%ea%b3%bc-%ec%9e%98-%ea%b3%a0%eb%a5%b4/" class="article-link">에어프라이어 구매 가이드 2023: 고려해야 할 점과 잘 고르는 방법</a>
+          </p>
+          
+        </div>
+      </article>
+
+      <article class="article blog_card clearfix">
+        <figure class="article-img img_card clearfix">
+          <img src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+        </figure>
+        <div class="inner">
+          <p class="index_pricearticle-title article-title--medium">
+            <a href="#" class="article-link">에디터 추천 BEST 5 바스켓형 에어프라이어</a>
+          </p>
+          
+        </div>
+      </article>
+
+      
+    </div>
+
+    <div class="magazine-column">
+      <article class="article">
+        <h3 class="article-title article-title--medium">
+          <a href="#" class="article-link">에어프라이어 관련 Blogs</a>
+        </h3>
+        <ul>
+          <li><a href="#n">Blog1</a></li>
+          <li><a href="#n">Blog1</a></li>
+          <li><a href="#n">Blog1</a></li>
+          <li><a href="#n">Blog1</a></li>
+          <li><a href="#n">Blog1</a></li>
+        </ul>
+      </article>
+    </div>
+  
+  </div>
+</main>

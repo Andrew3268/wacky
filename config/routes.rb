@@ -3,11 +3,20 @@ Rails.application.routes.draw do
   resources :airfryers
 
   root 'airfryers#index'
-
-
-
-  # get '/posts/hashtag/:name', to: 'posts#hashtags'
+  
+  
   get '/airfryers/af_hashtags/:name', to:'airfryers#hashtags'
+
+
+  # Hubs Link
+  get 'hub/airfryers_recommend' 
+  get 'hub/test_index' 
+  get 'hub/test_index_02'
+  get 'hub/wp_test'
+  get 'hub/wp_page'
+
+  get 'hub/authenticate_admin'
+
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

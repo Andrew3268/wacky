@@ -1,44 +1,163 @@
-<%= form_with(model: airfryer) do |form| %>
-  <% if airfryer.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(airfryer.errors.count, "error") %> prohibited this airfryer from being saved:</h2>
+<div class="from_box">
+  <div class="wrap">
+    <%= form_with(model: airfryer) do |form| %>
+      <% if airfryer.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(airfryer.errors.count, "error") %> prohibited this airfryer from being saved:</h2>
 
-      <ul>
-        <% airfryer.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% airfryer.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :af_title, style: "display: block" %>
-    <%= form.text_field :af_title, placeholder: "상품명" %>
-    <%= form.text_field :af_image, placeholder: "이미지" %>
-    <%= form.text_field :af_hashtag, placeholder: "해시태그" %>
-    <%= form.text_field :af_price, placeholder: "가격" %>
-    <%= form.text_field :af_type, placeholder: "형태" %>
-    <%= form.text_field :af_volume, placeholder: "용량" %>
-    <%= form.text_field :af_material, placeholder: "소재" %>
-    <%= form.text_field :af_power, placeholder: "소비전력" %>
-    <%= form.text_field :af_control, placeholder: "조작방식" %>
-    <%= form.text_field :af_temp, placeholder: "온도조절"  %>
-    <%= form.text_field :af_timer, placeholder: "시간조절"  %>
-    <%= form.text_field :af_automenu, placeholder: "자동매뉴갯수"  %>
-    <%= form.text_field :af_rotisserie, placeholder: "로티세리"  %>
-    <%= form.text_field :af_steam, placeholder: "스팀"  %>
-    <%= form.text_field :af_doubleheating, placeholder: "더블히팅"  %>
-    <%= form.text_field :af_dry, placeholder: "식품건조"  %>
-    <%= form.text_field :af_weight, placeholder: "무게"  %>
-    <%= form.text_field :af_size, placeholder: "사이즈"  %>
-    <br/>
-    <%= form.text_area :af_components, placeholder: "구성품"  %>
-    <%= form.text_area :af_function, placeholder: "부가기능"  %>
+      <div class="clearfix">
+        <!-- <%= form.label :af_title, style: "display: block" %> -->
 
+        <div class="input_box">
+          <%= form.label :af_recommend, "에디터 추천" %>
+          <%= form.text_field :af_recommend, label: "에디터 추천" %>
+        </div>
+
+        <div class="input_box">       
+          <%= form.label :af_title, "상품명" %>
+          <%= form.text_field :af_title %>
+        </div>
+      
+        <div class="input_box">       
+          <%= form.label :af_image, "이미지" %>
+          <%= form.text_field :af_image, label: "이미지" %>
+        </div>
+
+        <div class="input_box">       
+          <%= form.label :af_hashtag, "해시태그" %>
+          <%= form.text_field :af_hashtag, label: "해시태그" %>
+        </div>
+
+        <div class="input_box">       
+          <%= form.label :af_price, "판매 가격" %>
+          <%= form.text_field :af_price, label: "판매 가격" %>
+        </div>
+
+        <div class="input_box">   
+          <%= form.label :af_was_price, "세일전 가격" %>
+          <%= form.text_field :af_was_price, label: "세일전 가격" %>
+        </div>
+
+        <div class="input_box">   
+          <%= form.label :af_pct, "할인율" %>
+          <%= form.text_field :af_pct, label: "할인율" %>
+        </div>
+
+        <div class="input_box">   
+          <%= form.label :af_ratings, "평점" %>
+          <%= form.text_field :af_ratings, label: "평점" %>
+        </div>
+
+
+        <div class="input_box">
+          <%= form.label :af_rating_code, "평점 코드" %>
+          <%= form.text_field :af_rating_code, label: "평점 코드" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_reviews, "리뷰 수" %>
+          <%= form.text_field :af_reviews, label: "리뷰 수" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_oventype, "오븐형" %>
+          <%= form.text_field :af_oventype, label: "오븐형" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_baskettype, "바스켓형" %>
+          <%= form.text_field :af_baskettype, label: "바스켓형" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_volume, "용량" %>
+          <%= form.text_field :af_volume, label: "용량" %>
+        </div>
+
+
+        <div class="input_box">
+          <%= form.label :af_material, "소재" %>
+          <%= form.text_field :af_material, label: "소재" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_stainless, "스텐소재?" %>
+          <%= form.text_field :af_stainless, label: "스텐소재?" %>
+        </div>        
+
+        <div class="input_box">
+          <%= form.label :af_power, "소비전력" %>
+          <%= form.text_field :af_power, label: "소비전력" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_control, "조작방식" %>
+          <%= form.text_field :af_control, label: "조작방식" %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_temp, "온도조절"  %>
+          <%= form.text_field :af_temp, label: "온도조절"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_timer, "시간조절"  %>
+          <%= form.text_field :af_timer, label: "시간조절"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_automenu, "자동매뉴갯수"  %>
+          <%= form.text_field :af_automenu, label: "자동매뉴갯수"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_cutheating, "자동열차단"  %>
+          <%= form.text_field :af_cutheating, label: "자동열차단"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_rotisserie, "로티세리"  %>
+          <%= form.text_field :af_rotisserie, label: "로티세리"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_steam, "스팀"  %>
+          <%= form.text_field :af_steam, label: "스팀"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_doubleheating, "더블히팅"  %>
+          <%= form.text_field :af_doubleheating, label: "더블히팅"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_dry, "식품건조"  %>
+          <%= form.text_field :af_dry, label: "식품건조"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_weight, "무게"  %>
+          <%= form.text_field :af_weight, label: "무게"  %>
+        </div>
+
+        <div class="input_box">
+          <%= form.label :af_size, "사이즈"  %>  
+          <%= form.text_field :af_size, label: "사이즈"  %>
+        </div>
+        
+      </div>
+
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
-
+</div>

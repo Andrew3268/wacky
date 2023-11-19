@@ -1,0 +1,49 @@
+<% if airfryer.af_volume <= 5 %>1인용 <% elsif airfryer.af_volume >= 6 && airfryer.af_volume <= 10 %>2인_또는_3 <% else %>4인이상 <% end %><% if airfryer.af_price <= 49999 %>5만원_이하 <% elsif airfryer.af_price >= 50000 && airfryer.af_price <= 99999 %>5만원_10만원_사이 <% elsif airfryer.af_price >= 100000 && airfryer.af_price <= 199999 %>10만원_20만원_사이 <% elsif airfryer.af_price >= 200000 && airfryer.af_price <= 299999 %>20만원_30만원_사이 <% else %>30만원_이상 <% end %> <% if airfryer.af_stainless.present? %>스테인리스 <% end %> <% if airfryer.af_oventype.present? %>오븐형 <% end %><% if airfryer.af_baskettype.present? %>바스켓형 <% end %><% if airfryer.af_doubleheating.present? %>더블히팅 <% end %><% if airfryer.af_rotisserie.present? %>로티세리 <% end %><% if airfryer.af_steam.present? %>스팀세척 <% end %><% if airfryer.af_dry.present? %>식품건조 <% end %>
+
+<% if airfryer.af_volume <= 5 %>
+  1인용  
+<% elsif airfryer.af_volume >= 6 && airfryer.af_volume <= 10 %>
+  2인_또는_3  
+<% else %>
+  4인이상  
+<% end %>
+
+<% if airfryer.af_price <= 49999 %>
+  5만원_이하  
+<% elsif airfryer.af_price >= 50000 && airfryer.af_price <= 99999 %>
+  5만원_10만원_사이  
+<% elsif airfryer.af_price >= 100000 && airfryer.af_price <= 199999 %>
+  10만원_20만원_사이  
+<% elsif airfryer.af_price >= 200000 && airfryer.af_price <= 299999 %>
+  20만원_30만원_사이  
+<% else %>
+  30만원_이상  
+<% end %> 
+
+<% if airfryer.af_stainless.present? %>
+  스테인리스  
+<% end %>
+
+<% if airfryer.af_oventype.present? %>
+  oven 
+<% end %>
+
+<% if airfryer.af_baskettype.present? %>
+  바스켓형  
+<% end %>
+
+<% if airfryer.af_doubleheating.present? %>
+  더블히팅  
+<% end %>
+
+<% if airfryer.af_rotisserie.present? %>
+  로티세리  
+<% end %>
+
+<% if airfryer.af_steam.present? %>
+  스팀세척  
+<% end %>
+
+<% if airfryer.af_dry.present? %>
+  식품건조 
+<% end %>

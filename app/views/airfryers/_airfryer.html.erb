@@ -1,9 +1,421 @@
 <div id="<%= dom_id airfryer %>">
-  <p>
-    <strong>Af title:</strong>
-    <%= airfryer.af_title %>
-  </p>
 
-  <p><%= render_with_afhashtags(airfryer.af_hashtag) %></p>
+  <figure class="show_img">
+    <img src="<%= airfryer.af_image %>" alt="<%= airfryer.af_title %>">
+  </figure>
 
-</div>
+  <div class="show_inner">
+
+    <section class="basic_section">
+      <h3 class="product_title"><%= airfryer.af_title %></h3>
+      <!-- <div class="ratings">
+        <% if airfryer.af_rating_code == 50 %>
+          <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><em><%= airfryer.af_reviews %> Reviews</em></span>
+        <% elsif airfryer.af_rating_code == 45 %>
+          <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><em><%= airfryer.af_reviews %> Reviews</em></span>
+        <% elsif airfryer.af_rating_code == 40 %>
+          <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %> Reviews</em></span>
+        <% elsif airfryer.af_rating_code == 35 %>
+          <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %> Reviews</em></span>
+        <% elsif airfryer.af_rating_code == 30 %>
+          <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><em><%= airfryer.af_reviews %> Reviews</em></span>
+        <% end %>
+      </div>
+ -->
+      
+      <div class="hashtag_box">
+        <p><%= render_with_afhashtags(airfryer.af_hashtag) %></p>
+      </div>
+
+      <div class="admin_section">
+      <% if current_user && current_user.admin? %>  
+        <%= link_to "Edit", edit_airfryer_path(@airfryer) %> |
+        <%= button_to "Destroy", @airfryer, method: :delete %>
+      <% end %>
+    </div>
+
+      <div class="rating_review_section clearfix">  
+          <% limit_value_min =  0 %> 
+          <% limit_value_middle =  0 %>
+          
+          <% min_price = 26350 %>
+          <% max_price = 462300 %>
+          <% limit_value_min = min_price + (1 / 3.0) * (max_price - min_price) %>
+          <% limit_value_middle = min_price + (2 / 3.0) * (max_price - min_price) %>
+          <% price_location = (airfryer.af_price - min_price) / (max_price - min_price) * 100 %>
+
+          <% total_products = 500 %>
+          <% rank = ((max_price - airfryer.af_price) / (max_price - min_price)) * total_products %>
+          <% score = (rank / total_products) * 10 %>
+
+          <% price = airfryer.af_price %>
+          <% rating = airfryer.af_ratings %>
+          <% review_count = airfryer.af_reviews %>
+
+
+          <% if price <= limit_value_min %>
+            <% if rating >= 4.0 %>
+                <% if review_count <= 100 %>
+                  <p><strong><%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 좋은 평점</strong>을 받고 있는 제품입니다. 이는 제품의 품질과 가격이 사용자들에게 어느 정도 만족을 주고 있다는 것을 의미합니다. 하지만 <strong>리뷰 수가 100개 이하</strong>인 점은, 상품이 충분히 많은 사용자들로부터 검증받지 않았음을 나타냅니다. 이런 점을 고려할 때, 이 제품은 가격 대비 괜찮은 선택이지만, 구매 전 다른 사용자의 리뷰를 참고하거나 비슷한 다른 제품과 비교해보시는 것이 좋습니다.</p>
+                <% else %>
+                  <p>"<%= airfryer.af_title %>"이 제품은 <strong>가격 대비 매우 훌륭한 선택</strong>입니다. 상품은 저렴한 편에 속하면서도 사용자로부터<strong> <%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 좋은 평점</strong>을 받고있습니다. 또한, <strong>100개 이상의 리뷰</strong>가 있어 상품에 대한 다양한 사용자 의견을 참고할 수 있습니다. 리뷰의 양과 질은 상품의 신뢰성을 높여주며, 많은 사용자들로부터 검증 받았다고 볼 수 있습니다. 이 상품은 가성비가 좋고 많은 사름들로부터 신뢰를 받고 있는 상품으로 판단됩니다.</p>
+                <% end %>
+            <% end %>
+
+          <% elsif price <= limit_value_middle %>
+              <% if rating >= 4.0 %>
+                <% if review_count <= 100 %>
+                  <p>이 상품은 사용자들로부터 <strong><%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 좋은 평점</strong>을 받고 있습니다. 하지만 <strong>리뷰 수가 100개 이하</strong>인 점은, 상품이 충분히 많은 사용자들로부터 검증받지 않았음을 나타냅니다. 이런 점을 고려할 때, 이 제품은 가격 대비 괜찮은 선택이지만, 구매 전 다른 사용자의 리뷰를 참고하거나 비슷한 다른 제품과 비교해보시는 것이 좋습니다.</p>
+                <% else %>
+                  <p>이 상품은 사용자들로부터 <strong><%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 좋은 평점</strong>을 받고 있으며, <strong>리뷰 수가 100개 이상</strong>으로 많은 사람들이 사용해 본 제품입니다. 다수의 경험을 바탕으로 한 평가를 확인할 수 있습니다. 이러한 리뷰는 제품의 신뢰성과 만족도를 가늠해 볼 수 있는 좋은 지표가 될 수 있습니다. 따라서, 이러한 제품은 품질이 검증된 것으로 간주하고 구매를 고려해볼 만합니다.</p>
+                <% end %>
+              <% end %>
+              
+          <% else %>
+              <% if rating >= 4.0 %>
+                <% if review_count <= 100 %>
+                  <p>이 상품은 상대적으로 높은 가격대에 위치하고 있음에도 불구하고, 소비자들로부터 <strong><%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 좋은 평점</strong>을 받고 있습니다. 하지만 <strong>리뷰 수가 100개 이하</strong>인 점은, 상품이 충분히 많은 사용자들로부터 검증받지 않았음을 나타냅니다. 이런 점을 고려할 때, 이 제품은 가격 대비 괜찮은 선택이지만, 구매 전 다른 사용자의 리뷰를 참고하거나 비슷한 다른 제품과 비교해보시는 것이 좋습니다.</p>
+                <% else %>
+                  <p>이 상품은 상대적으로 높은 가격대에 위치하고 있음에도 불구하고, 소비자들로부터 <strong><%= number_with_precision(airfryer.af_ratings, precision: 1) %> 이상의 높은 평점</strong>을 받고 있습니다. 많은 소비자들이 제품을 구매하고 평가를 남긴 것으로, 제품에 대한 광범위한 의견을 확인할 수 있습니다. 이러한 리뷰들은 고가의 제품에 대한 신뢰성을 평가하고, 구매를 결정하는 데 있어 중요한 요소가 될 수 있습니다.</p>
+                <% end %>
+              <% end %>
+          <% end %>          
+      </div>
+
+      <div class="btn_box"><a href="#" target="_blank">지금 확인 하기</a></div>
+    </section>
+
+
+    <section class="pricing_section clearfix">
+      <h3 class="h3_title">Prcing</h3>
+
+      <% if price_location < 33.33 %>
+        <div class="pricing lower_price">
+          <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+        </div>
+      <% elsif price_location > 66.66 %>
+        <div class="pricing high_price">
+          <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+        </div>
+      <% else %>
+        <div class="pricing middle_price">
+          <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+        </div>
+      <% end %>
+
+
+      <!-- <%= number_to_currency(limit_value_min, locale: :kr) %>원 -->
+      <!-- <%= number_to_currency(limit_value_middle, locale: :kr) %>원 -->
+      <%= number_with_precision(price_location, precision: 2) %>%
+
+      <div class="final_verdict_pricing clearfix">
+        <div class="price_chart_wrap">
+          <div class="chart-container clearfix">
+            <div class="chart">
+                <div class="section low">저렴한편</div>
+                <div class="section medium">중간</div>
+                <div class="section high">비싼편</div>
+                <div class="product-a"></div>
+            </div>
+            <div class="chart-label min-price"><%= number_to_currency(min_price, locale: :kr) %>원</div>
+            <div class="chart-label max-price"><%= number_to_currency(max_price, locale: :kr) %>원</div>
+            <div class="chart-label low_pct">0%</div>
+            <div class="chart-label high_pct">100%</div>
+            <div class="chart-label product-name" style="left:<%= number_with_precision(price_location, precision: 2) %>%">
+                <div class="arrow"></div>
+                <p>여기</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="desc_box">
+          <% if airfryer.af_price <= limit_value_min %>
+            <div class="price_description">
+              <p>"<%= airfryer.af_title %>"은 <strong><%= number_to_currency(min_price, locale: :kr) %>원부터 <%= number_to_currency(limit_value_min, locale: :kr) %>원</strong> 사이의 합리적인 가격대를 제공합니다. 이는 전체 비교 대상인 <strong><%= total_products %>개</strong> 제품 중에서도 <strong>상위권(<%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%)</strong>에 위치하며, <strong>10점 만점에 <%= score.round %>점</strong>이라는 높은 점수를 받았습니다. 이 제품은 경쟁력 있는 가격대를 제시하고 있어, 경제적인 선택이 될 것입니다.
+              </p>
+              <span>* 가격은 최저가기준이며, 업데이트 이후 가격은 변동 될 수 있음을 알려 드립니다.</span>
+            </div>
+          <% elsif airfryer.af_price <= limit_value_middle %>
+            <% if price_location < 50 %>
+              <div class="price_description">
+                
+                <p>"<%= airfryer.af_title %>"은 <strong><%= number_to_currency(limit_value_min, locale: :kr) %>원부터 <%= number_to_currency(limit_value_middle, locale: :kr) %>원</strong> 사이의 중간 가격대에 위치 하고 있습니다. 전체 비교 상품 <strong><%= total_products %>개</strong> 중에서 <strong>상위권(<%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>)%</strong>에 위치한다는 점에서 가격 경쟁력이 어느 정도 있다고 볼 수 있습니다. <strong>10점 만점에 <%= score.round %>점</strong>을 받은 것은 이 제품의 가격이 중간 이하 수준임을 의미하며, 이는 비교적 합리적인 가격대라고 볼 수 있습니다.</p>
+
+                <span>* 가격은 최저가기준이며, 업데이트 이후 가격은 변동 될 수 있음을 알려 드립니다.</span>
+              </div>
+            <% elsif price_location > 50 %> 
+              <div class="price_description">
+                <p>"<%= airfryer.af_title %>"은 <strong><%= number_to_currency(limit_value_min, locale: :kr) %>원부터 <%= number_to_currency(limit_value_middle, locale: :kr) %>원</strong> 사이의 중간 가격대에 위치 하고 있습니다. 전체 비교 상품 <strong><%= total_products %>개</strong> 중에서 <strong>10점 만점에 <%= score.round %>점</strong>, <strong>하위권(<%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>)%</strong>에 속하며 이는 비교 상품 내에서 상대적으로 가격이 조금 높은 편임을 의미합니다. 하지만 중간 가격대에 위치함을 고려했을 때, 여전히 적합한 선택이 될 수 있지만, 합리적인 가격대로 평가하기에는 다소 높은 가격을 가지고 있다고 볼 수 있습니다.</p>
+
+                <!-- <ul>
+                  <li>제품명: 디디오랩 더블히팅 올스텐 에어프라이어 14L</li>
+                  <li>가격대: 171,667원 ~ 316,983원 (중간 가격대)</li>
+                  <li>시장 내 위치: 전체 비교 상품 500개 중 하위 51.30%</li>
+                  <li>가격 경쟁력 점수: 10점 만점에 5점</li>
+                  <li>평가: 시장 내 상대적으로 높은 가격대, 중간 가격대임에도 가격 경쟁력 다소 부족</li>
+                  <li>소비자 적합성: 중간 가격대에 위치함을 고려할 때 여전히 많은 소비자들에게 적합할 수 있음</li>
+                  <li>종합 평가: 합리적인 가격대로 평가하기에는 가격이 다소 높은 편</li>
+                </ul> -->
+                <span>* 가격은 최저가기준이며, 업데이트 이후 가격은 변동 될 수 있음을 알려 드립니다.</span>
+
+
+              </div>
+            <% end %>  
+            
+          <% else %>
+            <div class="price_description">
+              
+              <p>"<%= airfryer.af_title %>"은 가격대는 현재 비싼 편에 속합니다. 가격 범위는 <strong><%= number_to_currency(limit_value_middle, locale: :kr) %>원부터 <%= number_to_currency(max_price, locale: :kr) %>원</strong> 사이며, 이는 전체 비교 상품 <strong><%= total_products %>개</strong> 중 <strong>하위 <%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</strong>에 해당합니다. 이는 비교 상품 내에서도 가격이 상당히 높다는 것을 의미하며, <strong>10점 만점에 <%= score.round %>점</strong>을 받은 가격 경쟁력 점수는 이러한 높은 가격대를 반영합니다.</p>
+
+
+              <span>* 가격은 최저가기준이며, 업데이트 이후 가격은 변동 될 수 있음을 알려 드립니다.</span>
+            </div>
+          <% end %>
+        </div><!-- pd_box -->
+      </div><!-- final_verdict_pricing -->
+    </section>
+
+    <!-- spec table -->
+    <section class="spec_table">
+      <h3 class="h3_title">Specifications</h3>
+      <div id="profile-description">
+        <div class="text show-more-height">
+
+           <table>
+              
+              <tr>
+                <td>에어프라이어 타입</td>
+                <% if airfryer.af_oventype.present? or airfryer.af_baskettype.present? %>
+                  <% if airfryer.af_oventype.present? %>
+                    <td>오븐형</td>
+                  <% end %>
+
+                  <% if airfryer.af_baskettype.present? %>
+                    <td>바스켓형</td>
+                  <% end %>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>용량</td>
+                <% if airfryer.af_volume.present? %>
+                  <td><%= number_with_precision(airfryer.af_volume, precision: 1) %>L</td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>소재</td>
+                <% if airfryer.af_material.present? %>
+                  <td><%= airfryer.af_material %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>소비전력</td>
+                <% if airfryer.af_power.present? %>
+                  <td><%= number_with_precision(airfryer.af_power, precision: 0) %>W</td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>조작방식</td>
+                <% if airfryer.af_control.present? %>
+                  <td><%= airfryer.af_control %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>온도조절</td>
+                <% if airfryer.af_temp.present? %>
+                  <td><%= airfryer.af_temp %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>시간조절</td>
+                <% if airfryer.af_timer.present? %>
+                  <td><%= airfryer.af_timer %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>자동메뉴 갯수</td>
+                <% if airfryer.af_automenu.present? %>
+                  <td><%= airfryer.af_automenu %>개</td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>자동열차단</td>
+                <% if airfryer.af_cutheating.present? %>
+                  <td><%= airfryer.af_cutheating %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <% if airfryer.af_oventype.present? %>
+                <tr>
+                  <td>로티세리</td>
+                  <% if airfryer.af_rotisserie.present? %>
+                    <td><%= airfryer.af_rotisserie %></td>
+                  <% else %>
+                    <td> - </td>
+                  <% end %>
+                </tr>
+              <% end %>
+
+              <tr>
+                <td>스팀</td>
+                <% if airfryer.af_steam.present? %>
+                  <td><%= airfryer.af_steam %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>더블히팅</td>
+                <% if airfryer.af_doubleheating.present? %>
+                  <td><%= airfryer.af_doubleheating %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>식품건조</td>
+                <% if airfryer.af_dry.present? %>
+                  <td><%= airfryer.af_dry %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>무게</td>
+                <% if airfryer.af_weight.present? %>
+                  <td><%= airfryer.af_weight %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+
+              <tr>
+                <td>사이즈</td>
+                <% if airfryer.af_size.present? %>
+                  <td><%= airfryer.af_size %></td>
+                <% else %>
+                  <td> - </td>
+                <% end %>
+              </tr>
+           </table>
+        </div>  
+        <div class="show-more">더 보기</div>   
+      </div>
+    </section>
+
+      
+    <section class="features">
+      <h3 class="h3_title">Features</h3>
+      <% bill_usage =  0 %> 
+      <% bill_basic = 910 %>
+      <% bill_1kwhcoast = 120 %> 
+      <% bill_usetime = 5 %> 
+      <% bill_useday = 30 %>
+      <% bill_usage =  (airfryer.af_power * bill_usetime * bill_useday) / 1000 %> 
+      <% bill_total = bill_1kwhcoast * bill_usage %>
+
+      <ul>
+        <div id="features-profile-description">
+          <div class="features_text show-more-features-height">
+            <% if airfryer.af_power.present? %>
+              <li><strong>전기요금:</strong> 이 제품의 소비전력은 <%= number_with_precision(airfryer.af_power, precision: 0) %>W이며, 만약 매일 <%= bill_usetime %>시간씩 <%= bill_useday %>일을 사용한다고 가정하면 약 <%= number_to_currency(bill_total, locale: :kr) %>원의 전기세가 예상됩니다.</li>
+              <div class="notice_box">
+                <span>🖐잠깐!!</span>
+                <span>이 요금은 기본요금, 부가세 등을 제외한 요금입니다. 더 정확한 계산을 원하시면 여기서 해볼수 있습니다.</span>
+              </div>
+            <% end %>
+
+            <% if airfryer.af_volume >= 10 %>
+              <li><strong>용량:</strong> 이 에어프라이어의 용량은 <%= number_with_precision(airfryer.af_volume, precision: 0) %>L 이며, 4인분 이상의 음식을 조리하기에 적합합니다.</li>
+            <% elsif airfryer.af_volume >= 6 && airfryer.af_volume < 10 %> 
+              <li><strong>용량:</strong> 이 에어프라이어의 용량은 <%= number_with_precision(airfryer.af_volume, precision: 0) %>L 이며, 2~3인분의 음식을 조리하기에 적합합니다.</li>
+            <% else %>
+              <li><strong>용량:</strong> 이 에어프라이어의 용량은 <%= number_with_precision(airfryer.af_volume, precision: 0) %>L 이며, 1~2인분의 음식을 조리하기에 적합합니다.</li>
+            <% end %>
+
+            <% if airfryer.af_cutheating.present? %>
+              <li><strong>자동열차단:</strong> 과열을 방지하고 사용자의 안전을 보장하기 위해 특정 온도에 도달하면 기기의 전원을 자동으로 차단하는 안전 기능입니다.</li>
+            <% end %>
+            <% if airfryer.af_timer.present? %>
+              <li><strong>시간조절:</strong> 시간조절이 가능하여 편리합니다.</li>
+            <% end %>
+            <% if airfryer.af_temp.present? %>
+              <li><strong>온도조절:</strong> 온도저절이 가능하여 편리합니다.</li>
+            <% end %>
+            <% if airfryer.af_rotisserie.present? %>
+              <li><strong>로티세리:</strong> 재료를 꼬챙이에 끼워 360도 자동으로 회전시키며 균일하게 조리하는 기능으로, 통삼겹, 통닭구이, 꼬치요리 등의 조리가 가능합니다. 겉은 바삭하고 속은 부드럽게 익혀져 맛과 질감이 훌륭한 요리가 가능합니다.</li>
+            <% end %>
+            <% if airfryer.af_steam.present? %>
+              <li><strong>스팀:</strong> 스팀 기능은 영양소와 수분 손실을 최소화하며, 촉촉하고 부드러운 식감의 조리가 가능합니다.</li>
+            <% end %>
+            <% if airfryer.af_doubleheating.present? %>
+              <li><strong>더블히팅:</strong> 위아래에서 열을 공급하여 음식을 더 빠르고 균일하게 조리하는 기능입니다. 조리 시간을 단축시키고 에너지 효율을 높일 수 있습니다.</li>
+            <% end %>
+            <% if airfryer.af_dry.present? %>
+              <li><strong>식품건조:</strong> 과일이나 채소 등을 건조시켜 장기 보관할 수 있게 하는 기능입니다. 이를 통해 건강한 스낵을 직접 만들 수 있습니다.</li>
+            <% end %>
+          </div>
+          <div class="show-more-features">더 보기</div>   
+        </div>
+      </ul>
+    </section>
+
+    <%= render 'shared/show_notice' %>
+
+  </div><!-- show_inner -->
+
+</div><!-- dom_id airfryer -->
+
+
+<!-- show more spec -->
+<script type="text/javascript">
+      $(".show-more").click(function () {
+        if($(".text").hasClass("show-more-height")) {
+            $(this).text("줄이기");
+        } else {
+            $(this).text("더 보기");
+        }
+
+        $(".text").toggleClass("show-more-height");
+    });
+</script>
+
+<!-- show more features -->
+<script type="text/javascript">
+      $(".show-more-features").click(function () {
+        if($(".features_text").hasClass("show-more-features-height")) {
+            $(this).text("줄이기");
+        } else {
+            $(this).text("더 보기");
+        }
+
+        $(".features_text").toggleClass("show-more-features-height");
+    });
+</script>
+

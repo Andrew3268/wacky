@@ -1,5 +1,6 @@
 class AirfryersController < ApplicationController
   before_action :set_airfryer, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show, :hashtags]
 
   # GET /airfryers or /airfryers.json
   def index
@@ -15,10 +16,20 @@ class AirfryersController < ApplicationController
     @airfryers = tag.airfryers
   end
 
-  
+  # def new
+  #   # @airfryer = Airfryer.new
+  #   @airfryer = current_user.airfryers.build
+  # end
+
   def new
-    @airfryer = Airfryer.new
+    unless current_user&.admin?
+      redirect_to "/hub/authenticate_admin"
+      return
+    end
+
+    @airfryer = current_user.airfryers.build
   end
+
 
   # GET /airfryers/1/edit
   def edit
@@ -26,7 +37,8 @@ class AirfryersController < ApplicationController
 
   # POST /airfryers or /airfryers.json
   def create
-    @airfryer = Airfryer.new(airfryer_params)
+    # @airfryer = Airfryer.new(airfryer_params)
+    @airfryer = current_user.airfryers.build(airfryer_params)
 
     respond_to do |format|
       if @airfryer.save
@@ -70,9 +82,11 @@ class AirfryersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def airfryer_params
-      params.require(:airfryer).permit(:af_title, :af_image, :af_hashtag, :af_price, :af_type, :af_volume, :af_material, :af_power, :af_control,
+      params.require(:airfryer).permit(:af_title, :af_image, :af_hashtag, :af_price, :af_oventype, :af_baskettype, :af_volume, :af_material, :af_power, :af_control,
                                        :af_temp, :af_timer, :af_automenu, :af_rotisserie, :af_steam, :af_doubleheating, :af_dry, :af_weight, :af_size,
-                                       :af_components, :af_function)
+                                       :af_cutheating, :af_was_price, :af_pct, :af_rating_code, :af_reviews, :af_recommend, :af_ratings, :af_stainless)
     end
 end
+
+
 

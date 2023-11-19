@@ -1,49 +1,94 @@
 <!--  -->
 
-
+<main class="wacky-wrapper">
 <!-- Compare basket -->
     <div class="compare-basket">
       <button class="action action--button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare(Max 3EA)</span></button>
     </div>
-    <!-- Main view -->
+
+    <!-- filter search --> 
+    <div class="filter_search_box">
+      <input type="text" id="filter-search" placeholder="상품명을 입력하세요." />
+    </div>
+
     <div class="view">
+
       <!-- Product grid -->
       <section class="grid">
         <!-- Products -->
         <% @airfryers.each do |air| %>
-          <div class="product">
+          <div class="product" filter-value="<%= air.af_title %>">
             <div class="product__info">
               
               <div class="img_box">
-                <img class="product__image" src="<%= air.af_image %>" alt="<%= air.af_title %>" />
-                <!-- < link_to image_tag(air.af_image, alt: air.af_title, title: air.af_title, :class => 'main_img'), air > -->
+                <!-- <img class="product__image" src="<%= air.af_image %>" alt="<%= air.af_title %>" /> -->
+                <%= link_to image_tag(air.af_image, alt: air.af_title, title: air.af_title, :class => 'product__image'), air %>
               </div>
             
               <h3 class="product__title"><%= air.af_title %></h3>
               
               <div class="detail extra highlight">
                 <label>가격대</label>
-                <p class="pct"><%= air.af_price %></p>
+                <% if air.af_price <= 49999 %>
+                  <p class="spec">5만원 이하</p>
+                <% elsif air.af_price >= 50000 && air.af_price <= 99999 %>
+                  <p class="spec">5 ~ 9만원대</p>
+                <% elsif air.af_price >= 100000 && air.af_price <= 149999 %>
+                  <p class="spec">10 ~ 15만원대</p>
+                <% elsif air.af_price >= 150000 && air.af_price <= 199999 %>
+                  <p class="spec">15 ~ 19만원대</p>
+                <% elsif air.af_price >= 200000 && air.af_price <= 249999 %>
+                  <p class="spec">20 ~ 24만원대</p>
+                <% elsif air.af_price >= 250000 && air.af_price <= 299999 %>
+                  <p class="spec">25 ~ 29만원대</p>
+                <% elsif air.af_price >= 300000 && air.af_price <= 349999 %>
+                  <p class="spec">30 ~ 34만원대</p>
+                <% elsif air.af_price >= 350000 && air.af_price <= 399999 %>
+                  <p class="spec">35 ~ 39만원대</p>
+                <% elsif air.af_price >= 400000 && air.af_price <= 449999 %>
+                  <p class="spec">40 ~ 44만원대</p>
+                <% elsif air.af_price >= 450000 && air.af_price <= 499999 %>
+                  <p class="spec">45 ~ 49만원대</p>
+                <% elsif air.af_price >= 500000 && air.af_price <= 999999 %>
+                  <p class="spec">50만원 이상</p>
+                <% end %>
+                
               </div>
 
               <div class="detail extra highlight">            
                 <label>형태</label>
-                <p class="pct"><%= air.af_type %></p>
+                <% if air.af_oventype.present? %>
+                  <p class="spec">오븐형</p>  
+                <% elsif air.af_baskettype.present? %>
+                  <p class="spec">바스켓형</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>소재</label>
-                <p class="pct"><%= air.af_material %></p>
+                <% if air.af_material.present? %>
+                  <p class="spec"><%= air.af_material %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">
                 <label>용량</label>
-                <p class="pct"><%= air.af_volume %></p>
+                <% if air.af_volume.present? %>
+                  <p class="spec"><%= air.af_volume %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>소비전력</label>
-                <p class="pct"><%= number_with_precision(air.af_power, precision: 0) %></p>
+                <% if air.af_power.present? %>
+                  <p class="spec"><%= number_with_precision(air.af_power, precision: 0) %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">    
@@ -51,44 +96,65 @@
                 <% kwh = air.af_power / 1000 %>
                 <% totla_kwh = (1 * 30 * kwh) * 97 %>        
                 <label>예상 전기세</label>
-                <p class="pct">약 <%= number_to_currency(totla_kwh, locale: :kr) %>원</p>
+                <% if air.af_power.present? %>
+                  <p class="spec">약 <%= number_to_currency(totla_kwh, locale: :kr) %>원</p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
+                
               </div>
 
               <div class="detail extra highlight">            
                 <label>조작부</label>
-                <p class="pct"><%= air.af_control %></p>
+                <% if air.af_control.present? %>
+                  <p class="spec"><%= air.af_control %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>온도 조절</label>
-                <p class="pct"><%= air.af_temp %></p>
+                <% if air.af_temp.present? %>
+                  <p class="spec"><%= air.af_temp %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>타이머</label>
-                <p class="pct"><%= air.af_timer %></p>
+                <% if air.af_timer.present? %>
+                  <p class="spec"><%= air.af_timer %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>자동 요리메뉴</label>
-                <p class="pct"><%= air.af_automenu %></p>
+                <% if air.af_automenu.present? %>
+                  <p class="spec"><%= air.af_automenu %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>로티세리</label>
                 <% if air.af_rotisserie.present? %>
-                  <p class="pct">O</p>
+                  <p class="spec">O</p>
                 <% else %>
-                  <p class="pct">X</p>
+                  <p class="spec">X</p>
                 <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>스팀</label>
                 <% if air.af_steam.present? %>
-                  <p class="pct">O</p>
+                  <p class="spec">O</p>
                 <% else %>
-                  <p class="pct">X</p>
+                  <p class="spec">X</p>
                 <% end %>
                 
               </div>
@@ -96,53 +162,53 @@
               <div class="detail extra highlight">            
                 <label>더블히팅</label>
                 <% if air.af_doubleheating.present? %>
-                  <p class="pct">O</p>
+                  <p class="spec">O</p>
                 <% else %>
-                  <p class="pct">X</p>
+                  <p class="spec">X</p>
                 <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>식품건조</label>
                 <% if air.af_dry.present? %>
-                  <p class="pct">O</p>
+                  <p class="spec">O</p>
                 <% else %>
-                  <p class="pct">X</p>
+                  <p class="spec">X</p>
                 <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>자동열차단</label>
-                <p class="pct">O</p>
+                <% if air.af_cutheating.present? %>
+                  <p class="spec">O</p>
+                <% else %>
+                  <p class="spec">X</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
                 <label>무게</label>
-                <p class="pct"><%= air.af_weight %></p>
+                <% if air.af_weight.present? %>
+                  <p class="spec"><%= air.af_weight %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
 
               <div class="detail extra highlight">            
-                <label>사이즈</label>
-                <p class="pct"><%= air.af_size %></p>
+                <label>사이즈(mm)</label>
+                <% if air.af_size.present? %>
+                  <p class="spec"><%= air.af_size %></p>
+                <% else %>
+                  <p class="spec">-</p>
+                <% end %>
               </div>
-
-              <div class="detail extra highlight">            
-                <label>구성품</label>
-                <p class="pct"><%= air.af_components %></p>
-              </div>
-
-              <div class="detail extra highlight">            
-                <label>부가 기능</label>
-                <p class="pct"><%= air.af_function %></p>
-              </div>
-
-                
               
               <div class="extra detail_btn">
-                <a class="btn" href="#n">View Detail</a>
+                <a class="btn" href="/airfryers/<%= air.id %>">자세히 보기</a>
               </div>
               <br><br><br>
-              <!-- <span class="product__is_price bottom_span"></span> -->
+
               
             </div><!-- product__info -->
             <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><!-- <span class="action__text action__text--invisible">Compare</span> --></label>
@@ -159,52 +225,7 @@
           </div><!-- product -->
 
         <% end %>
-
-<!--           <div class="product">
-            <div class="product__info">
-              
-              <div class="img_box">
-                <img class="product__image" src="" alt="" />
-              </div>
-            
-              <h3 class="product__title">상품명</h3>
-              
-                
-
-              <div class="detail extra highlight">
-                <p class="was_price">30,000원</p>
-              </div>
-
-              <div class="detail extra highlight">
-                <p class="pct">50% off</p>
-              </div>
-
-              <div class="detail extra highlight">            
-              </div>
-                
-              
-
-              <div class="detail extra highlight">
-              </div>
-
-
-              <div class="detail extra highlight">
-                <p class="review">1,000개</p>
-              </div>
-
-              
-              <div class="extra detail_btn">
-                <a class="btn" href="#n">View Detail</a>
-              </div>
-              <br><br><br>
-              
-              
-            </div>
-            <label class="action action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i></label>
-          </div> -->
-
-
-
+        
       </section>
     </div><!-- /view -->
     <!-- product compare wrapper -->
@@ -212,6 +233,6 @@
       <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
     </section>
 
-
-<%= render 'airfryers/compare_js' %>
-
+</main>
+<%= render 'airfryers/js_compare' %>
+<%= render 'airfryers/js_search' %>

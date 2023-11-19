@@ -1,0 +1,334 @@
+<!-- 버튼 추가 -->
+
+<main class="wacky-wrapper">
+  <!-- 풀스크린 모달 -->
+  <section id="fullScreenModal">
+      <div class="modal-inner">
+          
+          <a href="/airfryers" id="closeModal"><img src="<%=asset_path 'close_modal.png' %>"></a>
+
+          <!-- 인디케이터 추가 -->
+          <div class="indicator">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+          </div>
+
+          <div class="modal-content" data-step="1">
+              <h3>몇 명이서 사용할 예정인가요?(중복선택 X)</h3>
+              <ul class="category__nav">
+                  <li><a data-target="1인" href="#">1인</a></li>
+                  <li><a data-target="2인_또는_3" href="#">2인 또는 3인</a></li>
+                  <li><a data-target="4인이상" href="#">4인 이상</a></li>
+              </ul>
+              <button class="nextStep" disabled>다음</button>
+          </div>
+
+          <div class="modal-content" data-step="2" style="display: none;">
+              <h3>찾고 있는 가격대는 얼마인가요?(중복선택 X)</h3>
+              <ul class="category__nav">
+                  <li><a data-target="5만원_이하" href="#">5만원 이하</a></li>
+                  <li><a data-target="5만원_10만원_사이" href="#">5만원 ~ 10만원</a></li>
+                  <li><a data-target="10만원_20만원_사이" href="#">10만원 ~ 20만원</a></li>
+                  <li><a data-target="20만원_30만원_사이" href="#">20만원 ~ 30만원</a></li>
+                  <li><a data-target="30만원_이상" href="#">30만원 이상</a></li>
+              </ul>
+              <button class="nextStep" disabled>다음</button>
+          </div>
+          <div class="modal-content" data-step="3" style="display: none;">
+              <h3>어떤 타입의 에어프라이어를 찾고 있나요?(중복선택 X)</h3>
+              <ul class="category__nav">
+                  <li><a data-target="바스켓형" href="#">바스켓형</a></li>
+                  <li><a data-target="오븐형" href="#">오븐형</a></li>
+              </ul>
+              <button class="nextStep" disabled>다음</button>
+          </div>
+          <div class="modal-content" data-step="4" style="display: none;">
+              <h3>스테인리스 소재를 찾고 있나요?(중복선택 X)</h3>
+              <ul class="category__nav">
+                  <li><a data-target="스테인리스" href="#">네 :)</a></li>
+                  <li><a data-target="noting" href="#">아니오. 상관 없어요.</a></li>
+              </ul>              
+              <button class="nextStep" disabled>다음</button>
+          </div>
+          <div class="modal-content" data-step="5" style="display: none;">
+              <h3>추가적인 기능 중 원하는 것이 있다면 무엇인가요?(복수 선택 가능)</h3>
+              <ul class="category__nav">
+                  <li><a data-target="로티세리" href="#">로티세리</a></li>
+                  <li><a data-target="스팀세척" href="#">스팀세척</a></li>
+                  <li><a data-target="더블히팅" href="#">더블히팅</a></li>
+                  <li><a data-target="식품건조" href="#">식품건조</a></li>
+              </ul>
+              <button id="findProduct">찾기</button>
+          </div>
+      </div>
+  </section>
+
+  <section class="category row">
+      <div class="no-item">
+        <p>조건에 맞는 상품이 없어요 :(</p>
+        <p><a href="/hub/airfryers_recommend" >다시 찾아 보기</a></p>
+        <p><a href="/airfryers" >나가기</a></p>
+      </div>
+      <div class="yes-item clearfix">
+        <span id="itemCount">아이템 0개 찾았어요.</span>
+        <div id="selectedOptions"></div>
+        <div class="select_btn clearfix">
+          <a href="/hub/airfryers_recommend">다시 찾기</a>
+          <a href="/airfryers" >나가기</a>
+        </div>
+      </div>
+
+      <div id="whiteCover" class="white-cover"></div>
+
+      <div class="category-flex" style="padding: 0">
+
+          <!-- 뛰어 쓰기 주의 -->
+          <% @airfryers.each do |airfryer| %>
+
+              <a href="/airfryers/<%= airfryer.id %>" data-target="
+                <% if airfryer.af_volume <= 5 %>
+                  1인  
+                <% elsif airfryer.af_volume >= 6 && airfryer.af_volume <= 10 %>
+                  2인_또는_3  
+                <% else %>
+                  4인이상  
+                <% end %>
+
+                <% if airfryer.af_price <= 49999 %>
+                  5만원_이하  
+                <% elsif airfryer.af_price >= 50000 && airfryer.af_price <= 99999 %>
+                  5만원_10만원_사이  
+                <% elsif airfryer.af_price >= 100000 && airfryer.af_price <= 199999 %>
+                  10만원_20만원_사이  
+                <% elsif airfryer.af_price >= 200000 && airfryer.af_price <= 299999 %>
+                  20만원_30만원_사이  
+                <% else %>
+                  30만원_이상  
+                <% end %> 
+
+                <% if airfryer.af_stainless.present? %>
+                  스테인리스  
+                <% end %>
+
+                <% if airfryer.af_oventype.present? %>
+                  오븐형 
+                <% end %>
+
+                <% if airfryer.af_baskettype.present? %>
+                  바스켓형  
+                <% end %>
+
+                <% if airfryer.af_doubleheating.present? %>
+                  더블히팅  
+                <% end %>
+
+                <% if airfryer.af_rotisserie.present? %>
+                  로티세리  
+                <% end %>
+
+                <% if airfryer.af_steam.present? %>
+                  스팀세척  
+                <% end %>
+
+                <% if airfryer.af_dry.present? %>
+                  식품건조 
+                <% end %>" 
+              class="cableItem"> 
+
+                <figure class="image_box">
+                  <img src="<%= airfryer.af_image %>" alt="<%= airfryer.af_title %>" />
+                  <!-- <%= link_to image_tag(airfryer.af_image, alt: airfryer.af_title, title: airfryer.af_title), airfryer %> -->
+                </figure>
+                <div class="inner">
+                  <p><%= airfryer.af_title %></p>
+                  <!-- 
+                  <% if airfryer.af_price <= 49999 %>
+                    <p class="pct">5만원 이하</p>
+                  <% elsif airfryer.af_price >= 50000 && airfryer.af_price <= 99999 %>
+                    <p class="pct">5 ~ 9만원대</p>
+                  <% elsif airfryer.af_price >= 100000 && airfryer.af_price <= 149999 %>
+                    <p class="pct">10 ~ 15만원대</p>
+                  <% elsif airfryer.af_price >= 150000 && airfryer.af_price <= 199999 %>
+                    <p class="pct">15 ~ 19만원대</p>
+                  <% elsif airfryer.af_price >= 200000 && airfryer.af_price <= 249999 %>
+                    <p class="pct">20 ~ 24만원대</p>
+                  <% elsif airfryer.af_price >= 250000 && airfryer.af_price <= 299999 %>
+                    <p class="pct">25 ~ 29만원대</p>
+                  <% elsif airfryer.af_price >= 300000 && airfryer.af_price <= 349999 %>
+                    <p class="pct">30 ~ 34만원대</p>
+                  <% elsif airfryer.af_price >= 350000 && airfryer.af_price <= 399999 %>
+                    <p class="pct">35 ~ 39만원대</p>
+                  <% elsif airfryer.af_price >= 400000 && airfryer.af_price <= 449999 %>
+                    <p class="pct">40 ~ 44만원대</p>
+                  <% elsif airfryer.af_price >= 450000 && airfryer.af_price <= 499999 %>
+                    <p class="pct">45 ~ 49만원대</p>
+                  <% elsif airfryer.af_price >= 500000 && airfryer.af_price <= 999999 %>
+                    <p class="pct">50만원 이상</p>
+                  <% end %>
+                  <span>
+                    <% if airfryer.af_oventype.present? %>
+                      오븐형
+                    <% else %>
+                      바스켓형
+                    <% end %>
+                  </span>
+
+                  <span>
+                    <% if airfryer.af_doubleheating.present? %>
+                      더블히팅
+                    <% end %>
+                  </span>
+
+                  <span>
+                    <% if airfryer.af_rotisserie.present? %>
+                      로티세리   
+                    <% end %>
+                  </span>
+
+                  <span>
+                    <% if airfryer.af_rotisserie.present? %>
+                      스팀   
+                    <% end %>
+                  </span>
+
+                  <span>
+                    <% if airfryer.af_dry.present? %>
+                      식품건조   
+                    <% end %>
+                  </span> -->
+
+                </div>
+                
+              </a>
+  
+          <% end %>
+
+          <!-- <a href="#" data-target="1인, price_5, stainless, ovne, doubleheating, rotisserie steamwash dryfood" class="cableItem">
+              <div class="cableItem__img" style="background-image: url(http://new.incab.ru/wp-content/uploads/2018/01/dps.png)"></div>
+              <p class="cableItem__title">1인 price_5 stainless ovne doubleheating rotisserie af_steam dryfood</p>
+          </a> -->
+
+          
+
+          
+      </div>
+  </section>
+</main>
+
+
+<script type="text/javascript">
+
+   // 인디케이터 업데이트 함수
+  function updateIndicator(step) {
+      $('.dot').removeClass('active');
+      $('.dot').eq(step-1).addClass('active');
+  }
+
+
+  $(document).ready(function(){
+      // 모달이 페이지 로드와 함께 바로 보이게 설정 show/hidden
+      $('#fullScreenModal').show();
+
+      // 카테고리 선택 시 '다음' 버튼 활성화
+      $('.category__nav a').click(function(e) {
+          e.preventDefault();
+          $(this).parents('.modal-content').find('.nextStep').prop('disabled', false);
+      });
+
+      // '다음' 버튼 클릭 시 다음 단계로 이동
+      $('.nextStep').click(function() {
+          const currentStep = parseInt($(this).parents('.modal-content').attr('data-step'));
+          $(this).parents('.modal-content').hide();
+          $(`[data-step="${currentStep + 1}"]`).show();
+          updateIndicator(currentStep + 1);  // 인디케이터 업데이트
+      });
+
+      // '찾기' 버튼 클릭 시 모달 숨기기
+      $('#findProduct').click(function() {
+          $('#fullScreenModal').hide();
+
+          // // 사용자가 선택한 옵션을 표시하는 로직
+          // var selectedOptionsText = target.join(', '); // 선택된 옵션을 문자열로 변환
+          // $('#selectedOptions').text(selectedOptionsText); // 선택된 옵션을 표시할 요소에 텍스트 적용
+
+          // 선택된 옵션 표시를 위한 컨테이너 초기화
+          $('#selectedOptions').empty();
+
+          // 각 선택된 옵션을 개별 요소로 추가
+          target.forEach(function(option) {
+              $('#selectedOptions').append('<div class="option">' + option + '</div>');
+          });
+
+      });
+
+      
+      // '닫기' 버튼 클릭 시 모달 초기화 후 숨기기
+      $('#closeModal').click(function() {
+          $('#fullScreenModal').hide();
+          $('.modal-content').hide();
+          $('.modal-content[data-step="1"]').show();
+          updateIndicator(1);  // 인디케이터 초기화
+      });
+  });
+
+
+</script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // 페이지 로드 시 하얀 배경 표시
+    $('#whiteCover').show();
+
+    // "찾기" 버튼 클릭 시 하얀 배경 숨기기
+    $('#findProduct').click(function() {
+        $('#whiteCover').hide();
+    });
+});
+
+</script>
+
+
+<script type="text/javascript">
+  var target = [];
+
+    $('.category__nav a').click(function (e) {
+        e.preventDefault();
+
+        if ($(this).hasClass('checked')) {
+            $(this).removeClass('checked');
+            var currentIndex = target.indexOf($(this).attr('data-target'));
+            target.splice(currentIndex, 1);
+        } else {
+            $(this).addClass('checked');
+            target.push($(this).attr('data-target'));
+        }
+
+        $('.category').find('.cableItem').removeClass('cableItem-hide');
+
+        $.each(target, function (index, value) {
+            $('.category').find('.cableItem:not([data-target*="' + value + '"])').addClass('cableItem-hide');
+        });
+
+        $(document).ready(function() {
+         var visibleItemsCount = $('.category').find('.cableItem:not(.cableItem-hide)').length;
+            
+        // 아이템이 숨겨진 경우 "없음"을 표시
+        if (visibleItemsCount === 0) {
+            $('.no-item').show();
+            $('.yes-item').hide();
+        } else {
+            $('.no-item').hide();
+            $('#itemCount').text('조건에 맞는 상품을 ' + visibleItemsCount + '개 찾았어요.'); // 아이템 개수 업데이트
+            $('.yes-item').show();
+        }
+
+    });
+
+  });
+
+</script>

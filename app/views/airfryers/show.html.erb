@@ -1,10 +1,40 @@
-<p style="color: green"><%= notice %></p>
+<article class="show_warp clearfix">
+  <p class="product_details">Product Deatils</p>
 
-<%= render @airfryer %>
+  <% if current_user && current_user.admin? %>
+    <div class="show_hashtags">
+      <% if @airfryer.af_oventype.present? %>
+        <p>#오븐형</p> 
+      <% end %>
 
-<div>
-  <%= link_to "Edit this airfryer", edit_airfryer_path(@airfryer) %> |
-  <%= link_to "Back to airfryers", airfryers_path %>
+      <% if @airfryer.af_baskettype.present? %>
+        <p>#바스켓형</p> 
+      <% end %>
 
-  <%= button_to "Destroy this airfryer", @airfryer, method: :delete %>
-</div>
+      <% if @airfryer.af_price <= 49999 %>
+        <p>#5만원이하</p> 
+      <% elsif @airfryer.af_price >= 50000 && @airfryer.af_price <= 99999 %>
+        <p>#10만원이하</p>  
+      <% elsif @airfryer.af_price >= 100000 && @airfryer.af_price <= 199999 %>
+        <p>#20만원이하</p>   
+      <% elsif @airfryer.af_price >= 200000 && @airfryer.af_price <= 299999 %>
+        <p>#30만원이하</p> 
+      <% else %>
+        <p>#30만원이상</p> 
+      <% end %>
+
+      <% if @airfryer.af_volume <= 5 %>
+        <p>#1인용</p>
+      <% elsif @airfryer.af_volume >= 6 && @airfryer.af_volume <= 10 %>
+        <p>#2_3인용</p> 
+      <% else %>
+        <p>#4인용_이상</p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="show_card">
+    <%= render @airfryer %>
+  </div>
+    
+</article>
