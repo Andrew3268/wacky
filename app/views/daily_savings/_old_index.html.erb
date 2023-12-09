@@ -1,0 +1,14 @@
+<h1>Daily savings</h1>
+
+<div id="daily_savings">
+  <% @daily_savings.each do |daily_saving| %>
+    
+    <p><%= daily_saving.ds_title %> </p>
+    <img src="<%= daily_saving.ds_image %>" >
+    <p>
+      <%= link_to "Show this daily saving", daily_saving %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New daily saving", new_daily_saving_path %>

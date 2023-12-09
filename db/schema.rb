@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_19_054931) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_09_112546) do
   create_table "airfryers", force: :cascade do |t|
     t.integer "user_id"
     t.string "af_title"
@@ -51,6 +51,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_054931) do
     t.datetime "updated_at", null: false
     t.index ["airfryer_id"], name: "index_airfryers_tags_on_airfryer_id"
     t.index ["tag_id"], name: "index_airfryers_tags_on_tag_id"
+  end
+
+  create_table "daily_savings", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "ds_title"
+    t.string "ds_image"
+    t.string "ds_hashtag"
+    t.decimal "ds_price"
+    t.decimal "ds_was_price"
+    t.decimal "ds_pct"
+    t.decimal "ds_ratings"
+    t.integer "ds_rating_code"
+    t.integer "ds_reviews"
+    t.string "ds_recommend"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|

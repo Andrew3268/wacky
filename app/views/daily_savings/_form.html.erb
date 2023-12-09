@@ -1,0 +1,24 @@
+<div class="from_box">
+  <div class="wrap">
+    <%= simple_form_for(@daily_saving) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <div class="form-inputs">
+        <%= f.input :ds_title %>
+        <%= f.input :ds_image %>
+        <%= f.input :ds_hashtag %>
+        <%= f.input :ds_price %>
+        <%= f.input :ds_was_price %>
+        <%= f.input :ds_pct %>
+        <%= f.input :ds_ratings %>
+        <%= f.input :ds_rating_code %>
+        <%= f.input :ds_reviews %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

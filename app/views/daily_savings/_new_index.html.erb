@@ -1,0 +1,61 @@
+<main class="wacky-wrapper">
+  <div class="page-title">
+    <h2>Daily Savings</h2>
+  </div>
+
+  <article class="clearfix daily_wrap">
+    <% @daily_savings.each do |daily_saving| %>
+        <section class="saving_card">
+          <figure class="img_card clearfix">
+            <%= link_to image_tag(daily_saving.ds_image, alt: daily_saving.ds_title, title: daily_saving.ds_title, :class => 'ds_img'), daily_saving %>
+          </figure>
+
+          <div class="inner">
+
+            <p class="saving_title text_line_two"><%= daily_saving.ds_title %></p>
+
+            <div class="ratings">
+              <% if daily_saving.ds_rating_code == 50 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><em><%= daily_saving.ds_reviews %>개의 리뷰</em></span>
+              <% elsif daily_saving.ds_rating_code == 45 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><em><%= daily_saving.ds_reviews %>개의 리뷰</em></span>
+              <% elsif daily_saving.ds_rating_code == 40 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><em><%= daily_saving.ds_reviews %>개의 리뷰</em></span>
+              <% elsif daily_saving.ds_rating_code == 35 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><em><%= daily_saving.ds_reviews %>개의 리뷰</em></span>
+              <% elsif daily_saving.ds_rating_code == 30 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><em><%= daily_saving.ds_reviews %>개의 리뷰</em></span>
+              <% end %>
+            </div>
+
+            <div class="prcing">
+              <p><%= number_to_currency(daily_saving.ds_price, locale: :kr) %>원</p>
+              <p><%= number_to_currency(daily_saving.ds_was_price, locale: :kr) %>원</p>
+              <p><%= number_to_percentage(daily_saving.ds_pct, precision: 0) %></p>
+            </div>
+
+            
+            <div class="admin_section">
+              <% if current_user && current_user.admin? %>  
+                <%= link_to "Edit", edit_daily_saving_path(daily_saving) %>
+              <% end %>
+            </div>
+            
+            
+          </div>
+          
+        </section>
+      
+    <% end %>
+
+    <section class="editor_recommend">
+      <figure class="article-img img_card clearfix">
+        <img src="https://images.unsplash.com/photo-1484807352052-23338990c6c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+      </figure>
+      <div class="inner">
+        <p>상품명</p>
+        <p>가격</p>
+      </div>
+    </section>
+  </article>
+</main>

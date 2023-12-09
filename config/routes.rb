@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :daily_savings
   devise_for :users
   resources :airfryers
 
   root 'airfryers#index'
+  # root 'daily_savings'
   
   
   get '/airfryers/af_hashtags/:name', to:'airfryers#hashtags'

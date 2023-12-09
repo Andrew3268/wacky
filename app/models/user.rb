@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :airfryers
+  has_many :daily_saving
 
   enum role: [:user, :moderator, :admin]
 

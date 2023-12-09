@@ -1,0 +1,11 @@
+.daily_wrap{}
+.daily_wrap .saving_card{float:left;width:23%;margin:1%;border:1px solid #ccc;border-radius:20px;height:350px;}
+.daily_wrap .saving_card .img_card{height:170px;position:relative;}
+.daily_wrap .saving_card .img_card img{width:90%;height:90%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:contain;}
+.daily_wrap .saving_card .inner{padding:10px;}
+.daily_wrap .saving_card .inner .saving_title{font-size:20px;background-color:#f6f6f6;}
+.daily_wrap .saving_card .inner .ratings{}
+.daily_wrap .saving_card .inner .ratings i{font-size:17px;}
+.daily_wrap .saving_card .inner .ratings em{vertical-align:text-bottom;}
+.daily_wrap .saving_card .inner .saving_title p{} 
+.daily_wrap .saving_card .inner .admin_section{}

@@ -1,0 +1,2 @@
+module DailySavingsHelper
+end
