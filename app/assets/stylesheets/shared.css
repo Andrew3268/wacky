@@ -1,8 +1,8 @@
-.notice_for_showpage{margin:1em 0;border:2px solid #ccc;padding:10px;border-radius:15px;}
+.notice_for_showpage{margin:1em 0 5em 0;border:2px solid #ccc;padding:10px;border-radius:15px;}
 
 header {
   background:#f7f7f7;
-  height: 100px;
+  height:60px;
   position: relative;
   margin-bottom:3%;
 }
@@ -80,7 +80,7 @@ header .container .head_nav {
 header .container .head_nav ul {
   text-align: center;
 }
-header .container .head_nav ul .visited a:after {
+/*header .container .head_nav ul .visited a:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -88,7 +88,7 @@ header .container .head_nav ul .visited a:after {
   background: black;
   margin: 15.5px 0;
   right: 0;
-}
+}*/
 header .container .head_nav ul li {
   display: inline-block;
   margin: 0 15px;
@@ -146,6 +146,7 @@ header .container .icons svg {
   border-radius: 4px;
   position: absolute;
   display: none;
+  z-index:1;
 }
 .mobile_menu:before {
   content: "";
@@ -177,7 +178,6 @@ header .container .icons svg {
   margin: 30px 0px;
 }
 .mobile_menu nav ul li a {
-  font-family: "Montserrat", sans-serif;
   opacity: 0;
   font-size: 25px;
   font-weight: 600;
@@ -206,16 +206,14 @@ header .container .icons svg {
   header .container {
     width: 100%;
   }
-  header .container .icons a {
-    width: 25px;
-    height: 25px;
-  }
+  
   header .head_nav {
     display: none;
   }
   header .logo {
     width: 100%;
-    text-align: center;
+    /*text-align: center;*/
+    margin-top:8px;
   }
   header .mobile_nav {
     cursor: pointer;

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  resources :daily_savings
+  # resources :daily_savings
+
+  resources :daily_savings do
+    member do
+      get 'happy_savings'
+      get 'half_savings'
+    end
+  end
+
+
   devise_for :users
   resources :airfryers
 
@@ -8,6 +17,8 @@ Rails.application.routes.draw do
   
   
   get '/airfryers/af_hashtags/:name', to:'airfryers#hashtags'
+  get '/daily_savings/ds_hashtags/:name', to:'daily_savings#hashtags'
+  
 
 
   # Hubs Link

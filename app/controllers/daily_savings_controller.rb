@@ -5,10 +5,27 @@ class DailySavingsController < ApplicationController
   # GET /daily_savings or /daily_savings.json
   def index
     @daily_savings = DailySaving.all
+
   end
 
   # GET /daily_savings/1 or /daily_savings/1.json
   def show
+    @happy_savings = DailySaving.where("ds_price <= ?", 10000).limit(4)
+    @half_savings = DailySaving.where("ds_pct >= ?", 50).limit(4)
+
+  end
+
+  def hashtags
+    tag = Tag.find_by(name: params[:name])
+    @daily_savings = tag.daily_savings
+  end
+
+  def happy_savings
+    @happy_savings = DailySaving.where("ds_price <= ?", 10000).limit(50)
+  end
+
+  def half_savings
+    @half_savings = DailySaving.where("ds_pct >= ?", 50).limit(50)
   end
 
   # GET /daily_savings/new
@@ -71,7 +88,7 @@ class DailySavingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def daily_saving_params
-      params.require(:daily_saving).permit(:ds_title, :ds_image, :ds_hashtag, :ds_price, :ds_was_price, :ds_pct, :ds_ratings, :ds_rating_code, :ds_reviews)
+      params.require(:daily_saving).permit(:ds_title, :ds_image, :ds_hashtag, :ds_price, :ds_was_price, :ds_pct, :ds_ratings, :ds_rating_code, :ds_reviews, :ds_link, :ds_rocket)
     end
 end
 

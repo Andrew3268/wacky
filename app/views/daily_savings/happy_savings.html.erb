@@ -1,0 +1,85 @@
+<main class="wacky-wrapper">
+  <div class="page-title">
+    <h2>만원의 행복!!</h2>
+  </div>
+
+
+  <div class="menu-wrapper">
+      <div class="menu-item">
+        <button><a href="/daily_savings">All</a></button>
+        <button><a href="/daily_savings/ds_hashtags/test1">test1</a></button>
+        <button><a href="/daily_savings/ds_hashtags/test2">test2</a></button>
+        <button><a href="/daily_savings/ds_hashtags/beauty">Beauty</a></button>
+        <button><a href="/daily_savings/ds_hashtags/cellphone_accessories">Cell Phone&Accessories</a></button>
+        <button><a href="/daily_savings/ds_hashtags/home_kitchen">Home&Kitchen</a></button>
+        <button><a href="/daily_savings/ds_hashtags/groceries">Groceries</a></button>
+        <button><a href="/daily_savings/ds_hashtags/sports_outdoor">Sports&Outdoor</a></button>
+        <button><a href="/daily_savings/ds_hashtags/pet_supplies">Pet Supplies</a></button>
+        <button><a href="/daily_savings/ds_hashtags/health_household">Health&Household</a></button>
+        <button><a href="/daily_savings/ds_hashtags/automotive">Automotive</a></button>
+        <button><a href="/daily_savings/ds_hashtags/baby_products">Baby</a></button>
+        <button><a href="/daily_savings/ds_hashtags/tools_home_improvement">Home Improvemnts</a></button>
+        <button><a href="/daily_savings/ds_hashtags/patio_lawn_garden">Patio&Lawn&Garden</a></button>
+        <button><a href="/daily_savings/ds_hashtags/toys_games">Toys&Games</a></button>
+        <button><a href="/daily_savings/ds_hashtags/video_games">Video Games</a></button>
+        <button><a href="/daily_savings/ds_hashtags/office_products">Office Products</a></button>
+        <button><a href="/daily_savings/ds_hashtags/musical_instruments">Msical Instruments</a></button>
+      </div> 
+    </div>
+
+  <div class="sub_menu">
+    <a href="/daily_savings/1/happy_savings">만원의 행복</a>
+    <a href="/daily_savings/1/half_savings">반값 할인</a>
+  </div>    
+
+  <article class="clearfix daily_wrap">
+    <% @happy_savings.each do |happy| %>
+        <section class="saving_card">
+          <figure class="img_card clearfix">
+            <%= link_to image_tag(happy.ds_image, alt: happy.ds_title, title: happy.ds_title, :class => 'ds_img'), happy %>
+          </figure>
+
+          <div class="inner">
+
+            <div class="ratings">
+              <% if happy.ds_rating_code == 50 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><em><%= number_with_delimiter(happy.ds_reviews) %>개의 리뷰</em></span>
+              <% elsif happy.ds_rating_code == 45 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><em><%= number_with_delimiter(happy.ds_reviews) %>개의 리뷰</em></span>
+              <% elsif happy.ds_rating_code == 40 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(happy.ds_reviews) %>개의 리뷰</em></span>
+              <% elsif happy.ds_rating_code == 35 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(happy.ds_reviews) %>개의 리뷰</em></span>
+              <% elsif happy.ds_rating_code == 30 %>
+                <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(happy.ds_reviews) %>개의 리뷰</em></span>
+              <% end %>
+            </div>
+
+            <p class="saving_title text_line_two"><%= happy.ds_title %></p>
+            
+            <div class="pricing">
+              <div class="mobile_pricing">
+                <p class="pct"><%= number_to_percentage(happy.ds_pct, precision: 0) %></p>
+                <p class="was_price"><%= number_to_currency(happy.ds_was_price, locale: :kr) %>원</p>
+              </div>
+              <p class="is_price"><%= number_to_currency(happy.ds_price, locale: :kr) %>원</p>
+            </div>
+
+            
+            <div class="admin_section">
+              <% if current_user && current_user.admin? %>  
+                <%= link_to "Edit", edit_daily_saving_path(happy) %>
+              <% end %>
+            </div>
+            
+            
+          </div>
+          
+        </section>
+      
+    <% end %>
+
+
+  </article>
+</main>
+

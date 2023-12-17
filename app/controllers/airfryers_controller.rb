@@ -84,7 +84,7 @@ class AirfryersController < ApplicationController
     def airfryer_params
       params.require(:airfryer).permit(:af_title, :af_image, :af_hashtag, :af_price, :af_oventype, :af_baskettype, :af_volume, :af_material, :af_power, :af_control,
                                        :af_temp, :af_timer, :af_automenu, :af_rotisserie, :af_steam, :af_doubleheating, :af_dry, :af_weight, :af_size,
-                                       :af_cutheating, :af_was_price, :af_pct, :af_rating_code, :af_reviews, :af_recommend, :af_ratings, :af_stainless)
+                                       :af_cutheating, :af_was_price, :af_pct, :af_rating_code, :af_reviews, :af_recommend, :af_ratings, :af_stainless, :af_link)
     end
 end
 

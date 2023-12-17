@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_09_112546) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_09_120553) do
   create_table "airfryers", force: :cascade do |t|
     t.integer "user_id"
     t.string "af_title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_112546) do
     t.integer "af_rating_code"
     t.integer "af_reviews"
     t.string "af_recommend"
+    t.string "af_link"
     t.string "af_oventype"
     t.string "af_baskettype"
     t.decimal "af_volume"
@@ -64,9 +65,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_112546) do
     t.decimal "ds_ratings"
     t.integer "ds_rating_code"
     t.integer "ds_reviews"
-    t.string "ds_recommend"
+    t.string "ds_link"
+    t.string "ds_rocket"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "daily_savings_tags", id: false, force: :cascade do |t|
+    t.integer "daily_saving_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["daily_saving_id"], name: "index_daily_savings_tags_on_daily_saving_id"
+    t.index ["tag_id"], name: "index_daily_savings_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -90,4 +101,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_09_112546) do
 
   add_foreign_key "airfryers_tags", "airfryers"
   add_foreign_key "airfryers_tags", "tags"
+  add_foreign_key "daily_savings_tags", "daily_savings"
+  add_foreign_key "daily_savings_tags", "tags"
 end

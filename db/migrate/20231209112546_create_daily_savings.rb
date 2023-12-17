@@ -11,6 +11,8 @@ class CreateDailySavings < ActiveRecord::Migration[7.0]
       t.decimal :ds_ratings
       t.integer :ds_rating_code
       t.integer :ds_reviews
+      t.string :ds_link
+      t.string :ds_rocket
 
       t.timestamps
     end

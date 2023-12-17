@@ -5,15 +5,17 @@
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
       <div class="form-inputs">
-        <%= f.input :ds_title %>
-        <%= f.input :ds_image %>
-        <%= f.input :ds_hashtag %>
-        <%= f.input :ds_price %>
-        <%= f.input :ds_was_price %>
-        <%= f.input :ds_pct %>
-        <%= f.input :ds_ratings %>
-        <%= f.input :ds_rating_code %>
-        <%= f.input :ds_reviews %>
+        <%= f.input :ds_title, label: '상품명' %>
+        <%= f.input :ds_image, label: '이미지' %>
+        <%= f.input :ds_link, label: '상품주소' %>
+        <%= f.input :ds_rocket, label: '로켓배송' %>
+        <%= f.input :ds_hashtag, label: '해시태그' %>
+        <%= f.input :ds_price, label: '현재판매가격' %>
+        <%= f.input :ds_was_price, label: '세일전가격' %>
+        <%= f.input :ds_pct, label: '할인율' %>
+        <%= f.input :ds_ratings, label: '평점' %>
+        <%= f.input :ds_rating_code, label: '평점코드' %>
+        <%= f.input :ds_reviews, label: '리뷰수' %>
       </div>
 
       <div class="form-actions">

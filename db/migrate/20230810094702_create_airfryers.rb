@@ -12,6 +12,7 @@ class CreateAirfryers < ActiveRecord::Migration[7.0]
       t.integer :af_rating_code
       t.integer :af_reviews
       t.string :af_recommend
+      t.string :af_link
 
       t.string :af_oventype
       t.string :af_baskettype

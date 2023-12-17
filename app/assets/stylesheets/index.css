@@ -14,6 +14,8 @@ ul li::before{content:attr(data-icon);font-size:1.25em}.wacky-wrapper{width:95%;
 .page-title{padding-left:1.5rem;padding-right:1.5rem;display:flex;justify-content:center;font-size:50px;}
 .page-title h1{font-size:1.75rem;font-weight:700;color:#000;text-align:center;position:relative;}
 .page-title h1:after{content:"";display:block;position:absolute;width:100%;bottom:-3px;height:2px;background-color:currentcolor;}
+
+
 .magazine-layout{margin-top:2rem;display:grid;grid-template-columns:repeat(4,1fr);grid-row-gap:2rem;}
 .magazine-column{padding:0 .5rem;grid-column:span 5;}
 

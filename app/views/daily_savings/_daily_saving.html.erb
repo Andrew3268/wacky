@@ -1,7 +1,86 @@
 <div id="<%= dom_id daily_saving %>">
-  <p>
-    <strong>Title:</strong>
-    <%= daily_saving.ds_title %>
-  </p>
+<article class="show_warp clearfix">
+    <p class="product_details">Product Deatils</p>
+    <div class="admin_section">
+      <% if current_user && current_user.admin? %>  
+        <%= link_to "Edit", edit_daily_saving_path(@daily_saving) %> |
+        <%= button_to "Destroy", @daily_saving, method: :delete %>
+      <% end %>
+    </div>
 
+    <figure class="show_img">
+      <img src="<%= daily_saving.ds_image %>" alt="<%= daily_saving.ds_title %>">
+    </figure>
+
+    <div class="show_inner">
+
+      <section class="basic_section">
+        <h2 class="product_title"><%= daily_saving.ds_title %></h2>
+
+        <div class="ratings">
+          <% if daily_saving.ds_rating_code == 50 %>
+            <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><em><%= number_with_delimiter(daily_saving.ds_reviews) %>개의 리뷰</em></span>
+          <% elsif daily_saving.ds_rating_code == 45 %>
+            <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><em><%= number_with_delimiter(daily_saving.ds_reviews) %>개의 리뷰</em></span>
+          <% elsif daily_saving.ds_rating_code == 40 %>
+            <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(daily_saving.ds_reviews) %>개의 리뷰</em></span>
+          <% elsif daily_saving.ds_rating_code == 35 %>
+            <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(daily_saving.ds_reviews) %>개의 리뷰</em></span>
+          <% elsif daily_saving.ds_rating_code == 30 %>
+            <span><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i><em><%= number_with_delimiter(daily_saving.ds_reviews) %>개의 리뷰</em></span>
+          <% end %>
+        </div>
+
+        <div class="pricing">
+          
+          <% rocket_point = daily_saving.ds_price * 0.02 %>
+          <% just_point = daily_saving.ds_price * 0.01 %>
+          <% your_savings = daily_saving.ds_was_price - daily_saving.ds_price %>
+
+          <p class="pct"><%= number_to_percentage(daily_saving.ds_pct, precision: 0) %></p>
+          <p class="is_price"><%= number_to_currency(daily_saving.ds_price, locale: :kr) %>원</p>
+          <p class="was_price"><%= number_to_currency(daily_saving.ds_was_price, locale: :kr) %>원</p>
+          
+        </div>
+
+        <div class="description">
+          <p><strong><%= daily_saving.ds_title %></strong>은 현재 <strong><%= number_to_percentage(daily_saving.ds_pct, precision: 0) %></strong>할인 판매 중입니다. 할인 혜택을 받아 <strong><%= number_to_currency(daily_saving.ds_price, locale: :kr) %>원</strong>에 구매가 가능하여 <strong> <%= number_to_currency(your_savings, locale: :kr) %>원 절약</strong>할 수 있습니다. <% if daily_saving.ds_rocket.present? %>이 상품은 <strong>로켓 배송</strong> 서비스를 제공하고 있어 빠른 배송을 보장하며,<% end %> 구매 시 <strong>최대 <% if daily_saving.ds_rocket.present? %><%= number_to_currency(rocket_point.round(-1), locale: :kr) %>원<% else%><%= number_to_currency(just_point.round(-1), locale: :kr) %>원<% end %></strong> 쿠팡캐시 적립이 가능합니다.</p>
+
+          <div class="hashtag_box"><p><%= render_with_dshashtags(daily_saving.ds_hashtag) %></p></div>
+
+          <ul>
+            <li>* 현재 <%= "#{rand(1..50)}명의 사람들이 이 상품을 보고 있습니다." %></li>
+            <li>* 가격은 업로드 날짜 이 후 변경 될 수 있습니다.</li>
+            <li>* 쿠팡파트너스 일한으로 수수료를 받습니다.</li>
+          </ul>
+
+        </div>
+
+      
+        <div class="btn_box"><a href="<%= daily_saving.ds_link %>" target="_blank">지금 확인 하기</a></div>
+      </section>
+
+
+    </div><!-- show_inner -->
+
+    <div clsss="happy_savings">
+      <h3>만원의 행복!!</h3>
+      <% @happy_savings.each do |happy| %>
+          <p><%= link_to happy.ds_title, happy %> - <%= number_to_currency(happy.ds_price, locale: :kr) %>원</p>
+      <% end %>
+    </div>
+
+    <div clsss="half_savings">
+      <h3>반값 할인!!</h3>
+      <% @half_savings.each do |half| %>
+        <p><%= link_to half.ds_title, half %>- <%= number_to_percentage(half.ds_pct, precision: 0) %> </p>
+      <% end %>
+    </div>
+
+
+  </article>
+</div>
+
+<div class="sticky-button">
+  <a href="<%= daily_saving.ds_link %>" target="_blank">지금 확인 하기 by coupang</a>
 </div>
