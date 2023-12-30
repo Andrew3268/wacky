@@ -56,6 +56,8 @@ body{margin:0;padding:0;font-size:15px;color:#000;line-height:1.5;font-weight:30
 .admin_section a{}
 .admin_section form{display:inline-block;}
 
+.header-middle{text-align:center; } /* layout admin 임시 */
+
 /* Features ul li style custom */
 .features_section ul{margin:0;padding:5px;list-style:none;display:grid;gap:1rem;}
 .features_section ul li{display:grid;grid-template-columns:0 1fr;gap:1.75em;align-items:start;font-size:1rem;line-height:1.4;}

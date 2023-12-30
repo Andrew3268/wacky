@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # resources :daily_savings
-
+  
+  
   resources :daily_savings do
     member do
       get 'happy_savings'
@@ -8,11 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :homes
   devise_for :users
   resources :airfryers
 
-  root 'airfryers#index'
+  root 'homes#index'
+  # root 'airfryers#index'
   # root 'daily_savings'
   
   

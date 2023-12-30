@@ -129,9 +129,74 @@
       <section class="pricing_section clearfix">
         <h3 class="h3_title">Prcing</h3>
 
-        <div class="pricing_info clearfix">
+        <div class="price_info_box clearfix">
+          <% if price_location < 33.33 %> <!-- color green section -->
+            <div class="price_info_card">
+              <span>가격대</span>
+              <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+            </div>
 
-          <% if price_location < 33.33 %>
+            <div class="price_info_card">
+              <% if price_location > 50 %>
+                <span>하위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% else %>
+                <span>상위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% end %>
+            </div>
+
+            <div class="price_info_card">
+              <span>경쟁력</span>
+              <p><%= score.round %> / 10</p>
+            </div>
+
+          <% elsif price_location > 66.66 %>  <!-- color yellow section -->
+            <div class="price_info_card">
+              <span>가격대</span>
+              <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+            </div>
+
+            <div class="price_info_card">
+              <% if price_location > 50 %>
+                <span>하위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% else %>
+                <span>상위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% end %>
+            </div>
+
+            <div class="price_info_card">
+              <span>경쟁력</span>
+              <p><%= score.round %> / 10</p>
+            </div>
+          <% else %> <!-- color red section -->
+            <div class="price_info_card">
+              <span>가격대</span>
+              <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
+            </div>
+
+            <div class="price_info_card">
+              <% if price_location > 50 %>
+                <span>하위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% else %>
+                <span>상위</span>
+                <p><%= number_with_precision((100 - rank/total_products*100),  precision: 2) %>%</p>
+              <% end %>
+            </div>
+
+            <div class="price_info_card">
+              <span>경쟁력</span>
+              <p><%= score.round %> / 10</p>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- <div class="pricing_info clearfix">
+
+          <% if price_location < 33.33 %>  
             <div class="pricing lower_price comm_price">
               <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
             </div>
@@ -147,6 +212,7 @@
             <div class="point comm_price lower_price">
               <p><em>경쟁력</em><%= score.round %> / 10 점</p>
             </div>
+
           <% elsif price_location > 66.66 %>
             <div class="pricing high_price comm_price">
               <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
@@ -163,6 +229,7 @@
             <div class="point comm_price high_price">
               <p><em>경쟁력</em><%= score.round %> / 10 점</p>
             </div>
+
           <% else %>
             <div class="pricing middle_price comm_price">
               <%= render 'airfryers/pricing_details', airfryer: @airfryer %>
@@ -180,10 +247,7 @@
               <p><em>경쟁력</em><%= score.round %> / 10 점</p>
             </div>
           <% end %>
-
-          
-
-        </div>
+      </div> -->
 
 
         <!-- <%= number_to_currency(limit_value_min, locale: :kr) %>원 -->
@@ -199,16 +263,18 @@
                   <div class="section high">비싼편</div>
                   <div class="product-a"></div>
               </div>
-              <div class="chart-label min-price"><%= number_to_currency(min_price, locale: :kr) %>원</div>
-              <div class="chart-label max-price"><%= number_to_currency(max_price, locale: :kr) %>원</div>
-              <div class="chart-label low_pct">0%</div>
-              <div class="chart-label high_pct">100%</div>
-              <div class="chart-label product-name" style="left:<%= number_with_precision(price_location, precision: 2) %>%">
+              <div class="chart-label min-price"><%= number_to_currency(min_price, locale: :kr) %>원(0%)</div>
+              <div class="chart-label max-price"><%= number_to_currency(max_price, locale: :kr) %>원(100%)</div>
+              <!-- <div class="chart-label low_pct">0%</div>
+              <div class="chart-label high_pct">100%</div> -->
+              <div class="chart-location product-name" style="left:<%= number_with_precision(price_location, precision: 2) %>%">
                   <div class="arrow"></div>
                   <p>여기</p>
               </div>
             </div>
           </div>
+
+        
 
           <div class="desc_box">
             <% if airfryer.af_price <= limit_value_min %>

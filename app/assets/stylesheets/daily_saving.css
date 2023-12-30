@@ -1,7 +1,8 @@
 /************ Index Page *************/
 
 .daily_wrap{}
-.daily_wrap .saving_card{float:left;width:23%;margin:1%;border:1px solid #ccc;border-radius:20px;height:350px;}
+.daily_wrap .show_ctn{}
+.daily_wrap .saving_card{float:left;width:23%;margin:1%;border:1px solid #ccc;border-radius:20px;height:375px;}
 .daily_wrap .saving_card .img_card{height:170px;position:relative;margin:2%;border-radius:20px;background-color:#fff;}
 .daily_wrap .saving_card .img_card img{width:80%;height:80%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:contain;}
 .daily_wrap .saving_card .inner{padding:15px;}
@@ -15,11 +16,13 @@
 .daily_wrap .saving_card .inner .pricing .is_price{font-size:20px;font-weight:bold;}
 .daily_wrap .saving_card .inner .pricing .was_price{color:#3d3d3d;text-decoration:line-through;}
 .daily_wrap .saving_card .inner .pricing .pct{background-color:#3d3d3d;padding:3px 7px;border-radius:7px;color:#fff;}
+.daily_wrap .saving_card .inner .pricing .total_savings{background:#FF6969;padding:7px 10px 5px 10px;border-radius:10px;color:#fff;margin:5px 0;}
+.daily_wrap .saving_card .inner .pricing .total_savings strong{background-color:#fff;color:#FF6969;padding:3px 7px;border-radius:7px;font-size:17px;}
 .daily_wrap .saving_card .inner .admin_section{}
 
 
 
-/******* Coupon index menu *******/
+/******* index menu *******/
 .menu-wrapper{position:relative;overflow:hidden;margin:20px 0;}
 .menu-wrapper .menu-item{;overflow:auto;white-space:nowrap;}
 .menu-wrapper .menu-item button{background-color: #000;color:#fff;border-radius:10px;padding:5px 13px;margin-left:5px;font-size:13px;}
@@ -33,25 +36,31 @@
 
 
 
+/************ Show Page *************/
+.show_warp .show_ctn{margin-bottom:5%;}
+.show_warp .more_display .more_comm{float:left;width:50%;padding:20px;}
+.show_warp .more_display h3{font-size:30px;margin:10px 0;border-bottom:1px solid #ccc;}
+.show_warp .more_display .more_comm p{font-size:18px;margin:10px 0;}
+.show_warp .more_display .more_comm p strong{background-color:#08f;color:#fff;padding:3px 5px;border-radius:5px;}
+.show_warp .more_display .happy_savings{border-right:1px solid #ccc;}
+.show_warp .more_display .half_savings{}
+
+
+
 @media screen and (max-width:640px){
   /*.daily_wrap .saving_card{float:left;width:48%;} */
-  .daily_wrap .saving_card{float:none;width:100%;height:170px;margin-bottom:5%;}
+  .daily_wrap .saving_card{float:none;width:100%;height:185px;margin-bottom:5%;}
   .daily_wrap .saving_card .img_card{float:left;width:38%;margin-right:2%;height:150px;}
   .daily_wrap .saving_card .inner{float:left;width:58%;padding:20px 10px 10px 10px;}
   .daily_wrap .saving_card .inner .saving_title{font-size:15px;}
-  .daily_wrap .saving_card .inner .pricing .is_price{display:block;}
-  .daily_wrap .saving_card .inner .pricing .mobile_pricing{display:block;}
+  /*.daily_wrap .saving_card .inner .pricing .is_price{display:block;}*/
+  /*.daily_wrap .saving_card .inner .pricing .mobile_pricing{display:block;}*/
+  .show_warp .more_display .more_comm{float:none;width:100%;padding:15px;}
+  .show_warp .more_display .happy_savings{border-right:none;border-bottom:1px solid #ccc;}
 }
 @media screen and (min-width:641px) and (max-width:1199px){
   
 }
-
-
-/************ Show Page *************/
-
-
-
-
 
 
 

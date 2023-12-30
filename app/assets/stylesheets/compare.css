@@ -185,7 +185,7 @@ h3.product__title{font-size:100%;padding:10px 10px 20px 10px;height:90px;}
 .compare .detail .rating_box img{vertical-align:middle;}
 .compare .detail .rating_box i{font-size:16px;color:#000;}
 .compare .detail_btn{margin-top:10px;}
-.compare .detail_btn a{background-color:#363636;padding:10px;border-radius:10px;text-align:center;color:#fff;display:block;}
+.compare .detail_btn a{background-color:#363636;padding:10px;border-radius:10px;text-align:center;color:#fff;display:block;margin-bottom:5px;}
 .compare .detail .barGraph{width:50%;}
 .compare .detail .barGraph .graph{}
 .compare .detail .barGraph .graph-barBack{margin:0;}

@@ -1,5 +1,3 @@
-<!--  -->
-
 <main class="wacky-wrapper">
 <!-- Compare basket -->
     <div class="compare-basket">
@@ -76,7 +74,7 @@
               <div class="detail extra highlight">
                 <label>용량</label>
                 <% if air.af_volume.present? %>
-                  <p class="spec"><%= air.af_volume %></p>
+                  <p class="spec"><%= number_with_precision(air.af_volume, precision: 0) %>L</p>
                 <% else %>
                   <p class="spec">-</p>
                 <% end %>
@@ -85,7 +83,7 @@
               <div class="detail extra highlight">            
                 <label>소비전력</label>
                 <% if air.af_power.present? %>
-                  <p class="spec"><%= number_with_precision(air.af_power, precision: 0) %></p>
+                  <p class="spec"><%= number_with_precision(air.af_power, precision: 0) %>W</p>
                 <% else %>
                   <p class="spec">-</p>
                 <% end %>
@@ -205,6 +203,7 @@
               </div>
               
               <div class="extra detail_btn">
+                <a target="_blank" class="btn" href="<%= air.af_link %>">바로 확인하기</a>
                 <a class="btn" href="/airfryers/<%= air.id %>">자세히 보기</a>
               </div>
               <br><br><br>

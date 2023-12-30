@@ -1,4 +1,4 @@
-.show_warp{width:1000px;margin:0 auto 20% auto;padding:20px;border-radius:20px;color:#3d3d3d;}
+.show_warp{width:1000px;margin:0 auto 10% auto;padding:20px;border-radius:20px;color:#3d3d3d;}
 .show_warp p.product_details{text-align:center;font-size:30px;color:#777;margin-bottom:5%;}
 .show_warp .show_hashtags{}
 .show_warp .show_hashtags p{display:inline-block;}
@@ -25,14 +25,14 @@
 .show_warp .show_inner .rating_review_section{font-size:17px;margin-top:1em;}
 .show_warp .show_inner .rating_review_section p{margin-bottom:10px;}
 
-.show_warp .show_inner .pricing_info{}
+/*.show_warp .show_inner .pricing_info{}
 .show_warp .show_inner .pricing_info .comm_price{float:left;width:31.33%;padding:5px 15px;border-radius:10px;margin:10px 0 -5px 0;font-weight:bold;margin:1%;}
 .show_warp .show_inner .pricing_info .comm_price p{font-size:20px;text-align:center;}
 .show_warp .show_inner .pricing_info .comm_price p em{display:block;}
 .show_warp .show_inner .pricing_info .pricing{display:inline-block;}
 .show_warp .show_inner .pricing_info .lower_price{background-color:#A8E183;border:3px solid #87B469;color:#5A953B;}
 .show_warp .show_inner .pricing_info .high_price{background-color:#ff7a64;border:3px solid #d0614f;color:#BB2718;}
-.show_warp .show_inner .pricing_info .middle_price{background-color:#ffda74;border:3px solid #cdae5d;color:#BE8C31;}
+.show_warp .show_inner .pricing_info .middle_price{background-color:#ffda74;border:3px solid #cdae5d;color:#BE8C31;}*/
 
 .show_warp .show_inner .final_verdict_pricing{}
 .show_warp .show_inner .final_verdict_pricing p{margin-bottom:10px;}
@@ -50,14 +50,20 @@
 .chart .low{width:33.33%;background-color:#A8E183;left:0;border:3px solid #87B469;border-right:none;color:#5A953B;}
 .chart .medium{width:33.33%;background-color:#ffda74;left:33.33%;color:#fff;border-top:3px solid #cdae5d;border-bottom:3px solid #cdae5d;color:#BE8C31;}
 .chart .high{width:33.34%;background-color:#ff7a64;left:66.66%;border:3px solid #d0614f;border-left:none;color:#BB2718;}
-.chart-label{position:absolute;color:#3e3e3e;}
+.chart-label{position:absolute;color:#898989;}
 .min-price{top:-20px;left:0;}
 .max-price{top:-20px;right:0;}
 .low_pct{left:0;}
 .high_pct{right:0;}
 .product-name{top:35px;transform:translateX(-50%);}
-.chart-label .arrow{width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:10px solid #000;position:absolute;top:-5px;left:50%;transform:translateX(-50%);}
-.chart-label p{font-size:15px;margin-top:5px;}
+.chart-location{position:absolute;}
+.chart-location .arrow{width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:10px solid #000;position:absolute;top:-5px;left:50%;transform:translateX(-50%);}
+.chart-location p{font-size:15px;margin-top:5px;}
+
+.price_info_box{padding:0 15px;}
+.price_info_box .price_info_card{float:left;margin-right:5%;}
+.price_info_box .price_info_card p {font-size:25px;font-weight:bold;border-bottom:2px solid #ccc;}
+.price_info_box .price_info_card span{}
 
 
 /* 스펙 테이블*/
@@ -95,7 +101,7 @@
 .show_warp .show_inner .basic_section .pricing .pct{background-color:#3d3d3d;padding:3px 7px;border-radius:7px;color:#fff;}
 .show_warp .show_inner .basic_section .description{margin:30px 0;font-size:17px;}
 .show_warp .show_inner .basic_section .description .hashtag_box{margin:15px 0;}
-.show_warp .show_inner .basic_section .description ul{margin-top:20px;}
+.show_warp .show_inner .basic_section .description ul{margin-ㅂ:20px;}
 .show_warp .show_inner .basic_section .description ul li{font-size:13px;color:#777;}
 
 
@@ -104,10 +110,11 @@
   .show_warp h2.product_title{width:100%;}
   .show_warp .show_card{margin-top:30px;}
   .show_warp .show_img{float:none;width:100%;margin:0;}
-  .show_warp .show_inner{float:none;width:100%;margin:5% 0 20% 0;}
+  .show_warp .show_inner{float:none;width:100%;margin:5% 0;}
   .price_chart_wrap{padding:10px;height:120px;}
   .show_warp .show_inner .basic_section .btn_box{display:none;}
   .sticky-button{display:block;}
+  .price_info_box .price_info_card{width:48%;margin:1% 1% 5% 1%;}
 
 
 }
