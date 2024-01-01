@@ -20,6 +20,7 @@ class Airfryer < ApplicationRecord
         airfryer.tags << tag
     end
   end
+
 end
 
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       get 'happy_savings'
       get 'half_savings'
+      get 'top_savings'
     end
   end
 

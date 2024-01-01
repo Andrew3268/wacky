@@ -2,35 +2,8 @@
   <div class="page-title">
     <h2>만원의 행복!!</h2>
   </div>
-
-
-  <div class="menu-wrapper">
-      <div class="menu-item">
-        <button><a href="/daily_savings">All</a></button>
-        <button><a href="/daily_savings/ds_hashtags/test1">test1</a></button>
-        <button><a href="/daily_savings/ds_hashtags/test2">test2</a></button>
-        <button><a href="/daily_savings/ds_hashtags/beauty">Beauty</a></button>
-        <button><a href="/daily_savings/ds_hashtags/cellphone_accessories">Cell Phone&Accessories</a></button>
-        <button><a href="/daily_savings/ds_hashtags/home_kitchen">Home&Kitchen</a></button>
-        <button><a href="/daily_savings/ds_hashtags/groceries">Groceries</a></button>
-        <button><a href="/daily_savings/ds_hashtags/sports_outdoor">Sports&Outdoor</a></button>
-        <button><a href="/daily_savings/ds_hashtags/pet_supplies">Pet Supplies</a></button>
-        <button><a href="/daily_savings/ds_hashtags/health_household">Health&Household</a></button>
-        <button><a href="/daily_savings/ds_hashtags/automotive">Automotive</a></button>
-        <button><a href="/daily_savings/ds_hashtags/baby_products">Baby</a></button>
-        <button><a href="/daily_savings/ds_hashtags/tools_home_improvement">Home Improvemnts</a></button>
-        <button><a href="/daily_savings/ds_hashtags/patio_lawn_garden">Patio&Lawn&Garden</a></button>
-        <button><a href="/daily_savings/ds_hashtags/toys_games">Toys&Games</a></button>
-        <button><a href="/daily_savings/ds_hashtags/video_games">Video Games</a></button>
-        <button><a href="/daily_savings/ds_hashtags/office_products">Office Products</a></button>
-        <button><a href="/daily_savings/ds_hashtags/musical_instruments">Msical Instruments</a></button>
-      </div> 
-    </div>
-
-  <div class="sub_menu">
-    <a href="/daily_savings/1/happy_savings">만원의 행복</a>
-    <a href="/daily_savings/1/half_savings">반값 할인</a>
-  </div>    
+  
+  <%= render 'daily_savings/menu' %> 
 
   <article class="clearfix daily_wrap">
     <% @happy_savings.each do |happy| %>
@@ -58,11 +31,14 @@
             <p class="saving_title text_line_two"><%= happy.ds_title %></p>
             
             <div class="pricing">
+              <% total_savings = 0 %>
+              <% total_savings = happy.ds_was_price - happy.ds_price %>
               <div class="mobile_pricing">
                 <p class="pct"><%= number_to_percentage(happy.ds_pct, precision: 0) %></p>
                 <p class="was_price"><%= number_to_currency(happy.ds_was_price, locale: :kr) %>원</p>
               </div>
               <p class="is_price"><%= number_to_currency(happy.ds_price, locale: :kr) %>원</p>
+              <p class="total_savings"><strong><%= number_to_currency(total_savings, locale: :kr) %>원</strong> 아끼기</p>
             </div>
 
             

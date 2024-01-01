@@ -1,6 +1,6 @@
 class DailySavingsController < ApplicationController
   before_action :set_daily_saving, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: [:index, :show, :hashtags]
+  before_action :authenticate_user!, except: [:index, :show, :hashtags, :happy_savings, :half_savings, :top_savings]
 
   # GET /daily_savings or /daily_savings.json
   def index
@@ -10,6 +10,7 @@ class DailySavingsController < ApplicationController
 
   # GET /daily_savings/1 or /daily_savings/1.json
   def show
+    @daily_saving.punch(request)
     @happy_savings = DailySaving.where("ds_price <= ?", 10000).limit(4)
     @half_savings = DailySaving.where("ds_pct >= ?", 50).limit(4)
 
@@ -21,11 +22,15 @@ class DailySavingsController < ApplicationController
   end
 
   def happy_savings
-    @happy_savings = DailySaving.where("ds_price <= ?", 10000).limit(50)
+    @happy_savings = DailySaving.where("ds_price <= ?", 10000).limit(30)
   end
 
   def half_savings
-    @half_savings = DailySaving.where("ds_pct >= ?", 50).limit(50)
+    @half_savings = DailySaving.where("ds_pct >= ?", 50).limit(30)
+  end
+
+  def top_savings
+    @top_savings = DailySaving.most_hit(1.day.ago, 30)
   end
 
   # GET /daily_savings/new

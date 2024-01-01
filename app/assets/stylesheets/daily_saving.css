@@ -5,6 +5,7 @@
 .daily_wrap .saving_card{float:left;width:23%;margin:1%;border:1px solid #ccc;border-radius:20px;height:375px;}
 .daily_wrap .saving_card .img_card{height:170px;position:relative;margin:2%;border-radius:20px;background-color:#fff;}
 .daily_wrap .saving_card .img_card img{width:80%;height:80%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);object-fit:contain;}
+.daily_wrap .saving_card .img_card .num{position:absolute;top:0;left:0;background-color:#08f;padding:5px 15px;color:#fff;font-size:20px;border-radius:15px;}
 .daily_wrap .saving_card .inner{padding:15px;}
 .daily_wrap .saving_card .inner .saving_title{font-size:17px;background-color:#f6f6f6;margin:5px 0;}
 .daily_wrap .saving_card .inner .ratings{}
@@ -33,7 +34,8 @@
 .menu-wrapper .left-pointer{left:0;top:-6px;}
 .menu-wrapper .right-pointer{right:0;}
 .menu-wrapper .dis i{color:#ccc;font-size:20px;margin-top:10px;}
-
+.savings_sub_menu{}
+.savings_sub_menu a{background-color:#08f;color:#fff;padding:5px 10px;border-radius:3px 10px;margin-right:10px;}
 
 
 /************ Show Page *************/
