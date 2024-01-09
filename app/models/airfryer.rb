@@ -1,4 +1,8 @@
 class Airfryer < ApplicationRecord
+  def to_param
+    "#{id}-#{af_title.gsub(/\s/, '-')}"
+  end
+
   belongs_to :user
   has_and_belongs_to_many :tags
 

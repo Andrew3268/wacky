@@ -1,4 +1,8 @@
 class DailySaving < ApplicationRecord
+  def to_param
+    "#{id}-#{ds_title.gsub(/\s/, '-')}"
+  end
+
   acts_as_punchable
 
   belongs_to :user
