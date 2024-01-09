@@ -7,6 +7,8 @@ gem "devise", "~> 4.9"
 gem 'simple_form'
 gem "punching_bag"
 gem 'friendly_id', '~> 5.4.0'
+gem "roo", "~> 2.10.0"
+
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

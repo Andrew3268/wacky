@@ -33,6 +33,32 @@ class DailySavingsController < ApplicationController
     @top_savings = DailySaving.most_hit(1.day.ago, 30)
   end
 
+  def import_data(xlsx_path)
+    xlsx = Roo::Spreadsheet.open(xlsx_path)
+    xlsx.sheet(0).each_with_index(user_id: 'User ID', ds_title: 'Title', ds_image: 'Image url', ds_link: 'Link', 
+                                  ds_rocket: 'Rocket', ds_hashtag: 'Hashtag', ds_price: 'Current Price', ds_was_price: 'Old Price',
+                                  ds_pct: 'PCT',ds_ratings: 'Ratings', ds_rating_code: 'Rating Code', ds_reviews: 'Reviews') do |row, row_index|
+                                    
+        next if row_index == 0 || DailySaving.find_by(ds_title: row[:ds_title]).present?
+
+        DailySaving.create(
+            user_id: row[:user_id],
+            ds_title: row[:ds_title],
+            ds_image: row[:ds_image],
+            ds_link: row[:ds_link],
+            ds_rocket: row[:ds_rocket],
+            ds_hashtag: row[:ds_hashtag],
+            ds_price: row[:ds_price],
+            ds_was_price: row[:ds_was_price],
+            ds_pct: row[:ds_pct],
+            ds_ratings: row[:ds_ratings],
+            ds_rating_code: row[:ds_rating_code],
+            ds_reviews: row[:ds_reviews]
+        )
+    end
+  end
+
+
   # GET /daily_savings/new
   def new
     unless current_user&.admin?

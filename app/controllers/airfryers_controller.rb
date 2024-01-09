@@ -21,6 +21,52 @@ class AirfryersController < ApplicationController
   #   @airfryer = current_user.airfryers.build
   # end
 
+  def import_data(xlsx_path)
+    xlsx = Roo::Spreadsheet.open(xlsx_path)
+    xlsx.sheet(0).each_with_index(user_id: 'User ID', af_recommend: 'Recommend', af_title: 'Title', af_image: 'Image url',
+                                  af_link: 'Link', af_hashtag: 'Hashtag', af_price: 'Current Price', af_was_price: 'Old Price', 
+                                  af_pct: 'PCT', af_ratings: 'Ratings', af_rating_code: 'Rating Code', af_reviews: 'Reivews', 
+                                  af_oventype: 'Oven Type', af_baskettype: 'Basket Type', af_volume: 'Volume', af_material: 'Material',
+                                  af_stainless: 'Stainless', af_power: 'Power', af_control: 'Controller', af_temp: 'Temperature', 
+                                  af_timer: 'Timer', af_automenu: 'Auto Menu', af_rotisserie: 'Rotisserie',  af_steam: 'Steam', 
+                                  af_doubleheating: 'Double heating', af_dry: 'Dry', af_cutheating: 'Cut heating', af_weight: 'Weight', af_size: 'Size') do |row, row_index|
+                                      
+        next if row_index == 0 || Airfryer.find_by(ds_title: row[:ds_title]).present?
+
+        Airfryer.create(
+            user_id: row[:user_id],
+            af_recommend: row[:af_recommend],
+            af_title: row[:af_title],
+            af_image: row[:af_image],
+            af_link: row[:af_link],
+            af_hashtag: row[:af_hashtag],
+            af_price: row[:af_price],
+            af_was_price: row[:af_was_price],
+            af_pct: row[:af_pct],
+            af_ratings: row[:af_ratings],
+            af_rating_code: row[:af_rating_code],
+            af_reviews: row[:af_reviews]
+            af_oventype: row[:af_oventype]
+            af_baskettype: row[:af_baskettype]
+            af_volume: row[:af_volume]
+            af_material: row[:af_material]
+            af_stainless: row[:af_stainless]
+            af_control: row[:af_control]
+            af_temp: row[:af_temp]
+            af_timer: row[:af_timer]
+            af_automenu: row[:af_automenu]
+            af_rotisserie: row[:af_rotisserie]
+            af_steam: row[:af_steam]
+            af_doubleheating: row[:af_doubleheating]
+            af_dry: row[:af_dry]
+            af_cutheating: row[:af_cutheating]
+            af_weight: row[:af_weight]
+            af_size: row[:af_size]
+
+        )
+    end
+  end
+
   def new
     unless current_user&.admin?
       redirect_to "/hub/authenticate_admin"
@@ -87,6 +133,25 @@ class AirfryersController < ApplicationController
                                        :af_cutheating, :af_was_price, :af_pct, :af_rating_code, :af_reviews, :af_recommend, :af_ratings, :af_stainless, :af_link)
     end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
