@@ -23,15 +23,16 @@ class AirfryersController < ApplicationController
 
   def import_data(xlsx_path)
     xlsx = Roo::Spreadsheet.open(xlsx_path)
-    xlsx.sheet(0).each_with_index(user_id: 'User ID', af_recommend: 'Recommend', af_title: 'Title', af_image: 'Image url',
-                                  af_link: 'Link', af_hashtag: 'Hashtag', af_price: 'Current Price', af_was_price: 'Old Price', 
-                                  af_pct: 'PCT', af_ratings: 'Ratings', af_rating_code: 'Rating Code', af_reviews: 'Reivews', 
-                                  af_oventype: 'Oven Type', af_baskettype: 'Basket Type', af_volume: 'Volume', af_material: 'Material',
-                                  af_stainless: 'Stainless', af_power: 'Power', af_control: 'Controller', af_temp: 'Temperature', 
-                                  af_timer: 'Timer', af_automenu: 'Auto Menu', af_rotisserie: 'Rotisserie',  af_steam: 'Steam', 
-                                  af_doubleheating: 'Double heating', af_dry: 'Dry', af_cutheating: 'Cut heating', af_weight: 'Weight', af_size: 'Size') do |row, row_index|
+    headers ={user_id: 'User ID', af_recommend: 'Recommend', af_title: 'Title', af_image: 'Image url',
+              af_link: 'Link', af_hashtag: 'Hashtag', af_price: 'Current Price', af_was_price: 'Old Price', 
+              af_pct: 'PCT', af_ratings: 'Ratings', af_rating_code: 'Rating Code', af_reviews: 'Reviews', 
+              af_oventype: 'Oven Type', af_baskettype: 'Basket Type', af_volume: 'Volume', af_material: 'Material',
+              af_stainless: 'Stainless', af_power: 'Power', af_control: 'Controller', af_temp: 'Temperature', 
+              af_timer: 'Timer', af_automenu: 'Auto Menu', af_rotisserie: 'Rotisserie',  af_steam: 'Steam', 
+              af_doubleheating: 'Double heating', af_dry: 'Dry', af_cutheating: 'Cut heating', af_weight: 'Weight', af_size: 'Size'}
+    xlsx.sheet(0).parse(headers).each_with_index do |row, row_index|
                                       
-        next if row_index == 0 || Airfryer.find_by(ds_title: row[:ds_title]).present?
+        next if row_index.zero? || Airfryer.find_by(af_title: row[:af_title]).present?
 
         Airfryer.create(
             user_id: row[:user_id],
@@ -45,22 +46,23 @@ class AirfryersController < ApplicationController
             af_pct: row[:af_pct],
             af_ratings: row[:af_ratings],
             af_rating_code: row[:af_rating_code],
-            af_reviews: row[:af_reviews]
-            af_oventype: row[:af_oventype]
-            af_baskettype: row[:af_baskettype]
-            af_volume: row[:af_volume]
-            af_material: row[:af_material]
-            af_stainless: row[:af_stainless]
-            af_control: row[:af_control]
-            af_temp: row[:af_temp]
-            af_timer: row[:af_timer]
-            af_automenu: row[:af_automenu]
-            af_rotisserie: row[:af_rotisserie]
-            af_steam: row[:af_steam]
-            af_doubleheating: row[:af_doubleheating]
-            af_dry: row[:af_dry]
-            af_cutheating: row[:af_cutheating]
-            af_weight: row[:af_weight]
+            af_reviews: row[:af_reviews],
+            af_oventype: row[:af_oventype],
+            af_baskettype: row[:af_baskettype],
+            af_volume: row[:af_volume],
+            af_material: row[:af_material],
+            af_stainless: row[:af_stainless],
+            af_power: row[:af_power],
+            af_control: row[:af_control],
+            af_temp: row[:af_temp],
+            af_timer: row[:af_timer],
+            af_automenu: row[:af_automenu],
+            af_rotisserie: row[:af_rotisserie],
+            af_steam: row[:af_steam],
+            af_doubleheating: row[:af_doubleheating],
+            af_dry: row[:af_dry],
+            af_cutheating: row[:af_cutheating],
+            af_weight: row[:af_weight],
             af_size: row[:af_size]
 
         )

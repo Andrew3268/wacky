@@ -37,7 +37,7 @@ class DailySavingsController < ApplicationController
     xlsx = Roo::Spreadsheet.open(xlsx_path)
     xlsx.sheet(0).each_with_index(user_id: 'User ID', ds_title: 'Title', ds_image: 'Image url', ds_link: 'Link', 
                                   ds_rocket: 'Rocket', ds_hashtag: 'Hashtag', ds_price: 'Current Price', ds_was_price: 'Old Price',
-                                  ds_pct: 'PCT',ds_ratings: 'Ratings', ds_rating_code: 'Rating Code', ds_reviews: 'Reviews') do |row, row_index|
+                                  ds_pct: 'PCT',ds_ratings: 'Ratings', ds_rating_code: 'Rating Code', ds_reviews: 'Reivews') do |row, row_index|
                                     
         next if row_index == 0 || DailySaving.find_by(ds_title: row[:ds_title]).present?
 
@@ -56,7 +56,9 @@ class DailySavingsController < ApplicationController
             ds_reviews: row[:ds_reviews]
         )
     end
-  end
+end
+
+
 
 
   # GET /daily_savings/new
