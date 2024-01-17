@@ -15,7 +15,11 @@
     <% @daily_savings.each do |daily_saving| %>
         <section class="saving_card">
           <figure class="img_card clearfix">
-            <%= link_to image_tag(daily_saving.ds_image, alt: daily_saving.ds_title, title: daily_saving.ds_title, :class => 'ds_img'), daily_saving %>
+            <% if daily_saving.ds_image.present? %>
+              <%= link_to image_tag(daily_saving.ds_image, alt: daily_saving.ds_title, title: daily_saving.ds_title, :class => 'ds_img'), daily_saving %>
+            <% else %>
+              <a href="/daily_savings/<%= daily_saving.id %>"><img src="<%=asset_path 'none image.jpg' %>"></a>
+            <% end %>
           </figure>
 
           <div class="inner">

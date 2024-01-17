@@ -1,7 +1,18 @@
 class DailySaving < ApplicationRecord
+
+  
+  # def to_param
+  #   "#{id}-#{ds_title.gsub(/\s/, '-')}"
+  # end
+
   def to_param
-    "#{id}-#{ds_title.gsub(/\s/, '-')}"
+    if ds_title.present?
+      "#{id}-#{ds_title.gsub(/\s/, '-')}"
+    else
+      id.to_s
+    end
   end
+
 
   acts_as_punchable
 

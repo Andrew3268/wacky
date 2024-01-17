@@ -19,8 +19,11 @@
             <div class="product__info">
               
               <div class="img_box">
-                <!-- <img class="product__image" src="<%= air.af_image %>" alt="<%= air.af_title %>" /> -->
-                <%= link_to image_tag(air.af_image, alt: air.af_title, title: air.af_title, :class => 'product__image'), air %>
+                <% if air.af_image.present? %>
+                  <%= link_to image_tag(air.af_image, alt: air.af_title, title: air.af_title, :class => 'product__image'), air %>
+                <% else %>
+                  <a href="/airfryers/<%= air.id %>"><img src="<%=asset_path 'none image.jpg' %>"></a>
+                <% end %>
               </div>
             
               <h3 class="product__title"><%= air.af_title %></h3>

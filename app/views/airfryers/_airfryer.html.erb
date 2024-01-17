@@ -35,7 +35,11 @@
     <% end %>
 
     <figure class="show_img">
-      <img src="<%= airfryer.af_image %>" alt="<%= airfryer.af_title %>">
+      <% if airfryer.af_image.present? %>
+        <img src="<%= airfryer.af_image %>" alt="<%= airfryer.af_title %>">
+      <% else %>
+        <img src="<%=asset_path 'none image.jpg' %>">
+      <% end %>
     </figure>
 
     <div class="show_inner">

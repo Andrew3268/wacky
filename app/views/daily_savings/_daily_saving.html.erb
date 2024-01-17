@@ -12,7 +12,11 @@
       </div>
 
       <figure class="show_img">
-        <img src="<%= daily_saving.ds_image %>" alt="<%= daily_saving.ds_title %>">
+        <% if daily_saving.ds_image.present? %>
+          <img src="<%= daily_saving.ds_image %>" alt="<%= daily_saving.ds_title %>">
+        <% else %>
+          <img src="<%=asset_path 'none image.jpg' %>">
+        <% end %>
       </figure>
 
       <div class="show_inner clearfix">

@@ -1,6 +1,15 @@
 class Airfryer < ApplicationRecord
+  # def to_param
+  #   "#{id}-#{af_title.gsub(/\s/, '-')}"
+  # end 
+
+
   def to_param
-    "#{id}-#{af_title.gsub(/\s/, '-')}"
+    if af_title.present?
+      "#{id}-#{af_title.gsub(/\s/, '-')}"
+    else
+      id.to_s
+    end
   end
 
   belongs_to :user

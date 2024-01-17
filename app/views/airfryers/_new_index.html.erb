@@ -45,7 +45,11 @@
           <% if airfryer.af_recommend.present? %>
             <section class="editor_recommend">
               <figure class="article-img img_card clearfix">
-                <%= link_to image_tag(airfryer.af_image, alt: airfryer.af_title, title: airfryer.af_title, :class => 'af_img'), airfryer %>
+                <% if airfryer.af_image.present? %>
+                  <%= link_to image_tag(airfryer.af_image, alt: airfryer.af_title, title: airfryer.af_title, :class => 'af_img'), airfryer %>
+                <% else %>
+                  <a href="/airfryers/<%= airfryer.id %>"><img src="<%=asset_path 'none image.jpg' %>"></a>
+                <% end %>
               </figure>
 
               <div class="inner">
